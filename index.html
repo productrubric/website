@@ -105,6 +105,16 @@ html.js .demo [data-anim].on { opacity: 1; transform: none; }
 .caret::after { content: "\2588"; margin-left: 1px; animation: blink 0.9s steps(1) infinite; color: #e9b8b8; }
 @keyframes blink { 50% { opacity: 0; } }
 
+/* Recordings */
+.vids { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 26px; align-items: start; }
+.vid { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+.vid .bar { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-bottom: 1px solid var(--line); background: var(--tint); }
+.vid .bar .who { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+.vid video { display: block; width: 100%; height: auto; background: var(--tint); }
+.vid .cap { padding: 14px 18px 18px; }
+.vid .cap p { margin: 0; color: var(--muted); font-size: 13.5px; }
+@media (max-width: 720px) { .vids { grid-template-columns: 1fr; } }
+
 /* Level key */
 .levels { margin: 0 0 20px; padding: 12px 0 14px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); display: grid; grid-template-columns: max-content 1fr; gap: 6px 18px; font-size: 14.5px; max-width: 72ch; }
 .levels dt { margin: 0; }
@@ -250,6 +260,29 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p>Every flawed question gets a rating, the criterion it breaks, and a rewritten version ready to drop into the survey. Every report closes with the same summary block, so a team can keep them across runs and watch the flaw counts fall.</p>
         <button class="replay" id="demo-replay" type="button">Replay</button>
       </div>
+    </div>
+  </section>
+
+  <section id="recordings">
+    <div class="kicker">Real recordings</div>
+    <h2>Watch it happen</h2>
+    <p class="sub">Three screen recordings from launch day, trimmed for length. The waiting has been sped up and nothing else has been changed. In the first, an assistant is handed the address from the card above and connects it. In the second, a designer asks a plain question about a homepage and gets a scored review back. In the third, a researcher hands over a study plan, and the rubric asks its questions before it will judge anything.</p>
+    <div class="vids">
+      <figure class="vid">
+        <div class="bar"><span class="who">Recording 1 · Adding the MCP · 0:43</span></div>
+        <video controls preload="none" playsinline width="1184" height="1556" poster="demo-add-mcp.jpg" src="demo-add-mcp.mp4"></video>
+        <figcaption class="cap"><p>One message with the address, and the assistant sets the connection up itself. No account, no key, and nothing to install. This was recorded in Muse; in Claude, ChatGPT, Cursor, or Grok, the same address goes into the connector settings listed above.</p></figcaption>
+      </figure>
+      <figure class="vid">
+        <div class="bar"><span class="who">Recording 2 · A homepage, scored · 0:52</span></div>
+        <video controls preload="none" playsinline width="1200" height="1340" poster="demo-homepage-review.jpg" src="demo-homepage-review.mp4"></video>
+        <figcaption class="cap"><p>The question is the one a designer would actually type, with no rubric named. The assistant chooses the Design Principles Score rubric, applies it to the screenshot, and lands on 72 out of 100, closing with the highest-impact fixes and the summary block.</p></figcaption>
+      </figure>
+      <figure class="vid">
+        <div class="bar"><span class="who">Recording 3 · A study plan, checked · 1:15</span></div>
+        <video controls preload="none" playsinline width="1080" height="1420" poster="demo-study-plan-review.jpg" src="demo-study-plan-review.mp4"></video>
+        <figcaption class="cap"><p>The same chat, a minute later. Before the Study Plan Review rubric will judge the plan, it asks for the context the plan is missing: who commissioned the study, what they already believe, and which decisions ride on it. Told to run anyway, it marks those gaps Missing rather than guessing, and the missing context is what holds the verdict at Not ready.</p></figcaption>
+      </figure>
     </div>
   </section>
 
