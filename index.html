@@ -113,12 +113,12 @@ html.js .demo [data-anim].on { opacity: 1; transform: none; }
 }
 .rec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 52px; align-items: start; }
 .rec-labels { display: flex; flex-direction: column; margin-top: 24px; border-top: 1px solid var(--line); }
-.rec-label { display: flex; align-items: baseline; gap: 12px; width: 100%; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--line); padding: 12px 10px; font: inherit; font-size: 15.5px; font-weight: 600; color: var(--muted); cursor: pointer; }
-.rec-label .n { font-family: var(--mono); font-size: 12.5px; font-weight: 500; color: var(--muted); }
+.rec-label { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--line); padding: 12px 10px; font: inherit; font-size: 15.5px; font-weight: 600; color: var(--muted); cursor: pointer; }
+.rec-label .ic { flex: none; display: block; }
 .rec-label .t { margin-left: auto; font-family: var(--mono); font-size: 12.5px; font-weight: 500; color: var(--muted); }
 .rec-label:hover { background: var(--hover); }
 .rec-label.is-active { color: var(--ink); box-shadow: inset 3px 0 0 var(--accent); }
-.rec-label.is-active .n { color: var(--accent); }
+.rec-label.is-active .ic { color: var(--accent); }
 .rec-cap { margin: 18px 0 0; color: #333338; font-size: 15px; max-width: 52ch; }
 .rec-stage { min-width: 0; }
 .vid { margin: 0 auto; max-width: 470px; background: #fff; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
@@ -289,9 +289,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <h2>Watch it happen</h2>
         <p class="sub">Short screen recordings, trimmed for length, with the waiting sped up and nothing else changed. One shows an assistant connecting the library, one shows a designer asking a plain question about a homepage, and one shows a researcher handing over a study plan. Choose a scene and press play.</p>
         <div class="rec-labels" role="group" aria-label="Choose a recording">
-          <button type="button" class="rec-label is-active" data-scene="0" aria-current="true"><span class="n">01</span><span class="name">Adding the MCP</span><span class="t">0:43</span></button>
-          <button type="button" class="rec-label" data-scene="1"><span class="n">02</span><span class="name">A homepage, scored</span><span class="t">0:52</span></button>
-          <button type="button" class="rec-label" data-scene="2"><span class="n">03</span><span class="name">A study plan, checked</span><span class="t">1:15</span></button>
+          <button type="button" class="rec-label is-active" data-scene="0" aria-current="true"><svg class="ic" viewBox="0 0 10 12" width="10" height="12" aria-hidden="true"><path d="M0 0 L10 6 L0 12 Z" fill="currentColor"/></svg><span class="name">Adding the MCP</span><span class="t">0:43</span></button>
+          <button type="button" class="rec-label" data-scene="1"><svg class="ic" viewBox="0 0 10 12" width="10" height="12" aria-hidden="true"><path d="M0 0 L10 6 L0 12 Z" fill="currentColor"/></svg><span class="name">A homepage, scored</span><span class="t">0:52</span></button>
+          <button type="button" class="rec-label" data-scene="2"><svg class="ic" viewBox="0 0 10 12" width="10" height="12" aria-hidden="true"><path d="M0 0 L10 6 L0 12 Z" fill="currentColor"/></svg><span class="name">A study plan, checked</span><span class="t">1:15</span></button>
         </div>
         <p class="rec-cap" id="rec-cap">One message with the address, and the assistant sets the connection up itself. No account, no key, and nothing to install. This was recorded in Muse; in Claude, ChatGPT, Cursor, or Grok, the same address goes into the connector settings listed above.</p>
       </div>
@@ -792,7 +792,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
     "The same chat, a minute later. Before the Study Plan Review rubric will judge the plan, it asks for the context the plan is missing: who commissioned the study, what they already believe, and which decisions ride on it. Told to run anyway, it marks those gaps Missing rather than guessing, and the missing context is what holds the verdict at Not ready."
   ];
   var i = 0;
-  function go(n) {
+  function go(n, autoplay) {
     i = Math.max(0, Math.min(slides.length - 1, n));
     slides.forEach(function (s, k) {
       var on = k === i;
@@ -808,8 +808,12 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
     if (count) count.textContent = "Scene " + (i + 1) + " of " + slides.length;
     if (prev) prev.disabled = i === 0;
     if (next) next.disabled = i === slides.length - 1;
+    if (autoplay) {
+      var av = slides[i].querySelector("video");
+      if (av) { var p = av.play(); if (p && p.catch) p.catch(function () {}); }
+    }
   }
-  labels.forEach(function (l, k) { l.addEventListener("click", function () { go(k); }); });
+  labels.forEach(function (l, k) { l.addEventListener("click", function () { go(k, true); }); });
   if (prev) prev.addEventListener("click", function () { go(i - 1); });
   if (next) next.addEventListener("click", function () { go(i + 1); });
   go(0);
