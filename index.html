@@ -106,14 +106,33 @@ html.js .demo [data-anim].on { opacity: 1; transform: none; }
 @keyframes blink { 50% { opacity: 0; } }
 
 /* Recordings */
-.vids { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 26px; align-items: start; }
-.vid { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+#recordings h2 { position: relative; }
+#recordings h2::before { counter-increment: sec; content: counter(sec); color: var(--accent); font-variant-numeric: oldstyle-nums proportional-nums; font-feature-settings: "onum" 1, "pnum" 1; display: inline-block; min-width: 0.9em; margin-right: 0.45em; }
+@media (min-width: 1100px) {
+  #recordings h2::before { position: absolute; right: 100%; top: 0; margin: 0 28px 0 0; min-width: 0; text-align: right; }
+}
+.rec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 52px; align-items: start; }
+.rec-labels { display: flex; flex-direction: column; margin-top: 24px; border-top: 1px solid var(--line); }
+.rec-label { display: flex; align-items: baseline; gap: 12px; width: 100%; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--line); padding: 12px 10px; font: inherit; font-size: 15.5px; font-weight: 600; color: var(--muted); cursor: pointer; }
+.rec-label .n { font-family: var(--mono); font-size: 12.5px; font-weight: 500; color: var(--muted); }
+.rec-label .t { margin-left: auto; font-family: var(--mono); font-size: 12.5px; font-weight: 500; color: var(--muted); }
+.rec-label:hover { background: var(--hover); }
+.rec-label.is-active { color: var(--ink); box-shadow: inset 3px 0 0 var(--accent); }
+.rec-label.is-active .n { color: var(--accent); }
+.rec-cap { margin: 18px 0 0; color: #333338; font-size: 15px; max-width: 52ch; }
+.rec-stage { min-width: 0; }
+.vid { margin: 0 auto; max-width: 470px; background: #fff; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
 .vid .bar { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-bottom: 1px solid var(--line); background: var(--tint); }
 .vid .bar .who { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
 .vid video { display: block; width: 100%; height: auto; background: var(--tint); }
-.vid .cap { padding: 14px 18px 18px; }
-.vid .cap p { margin: 0; color: var(--muted); font-size: 13.5px; }
-@media (max-width: 720px) { .vids { grid-template-columns: 1fr; } }
+html.js .rec-slide { display: none; }
+html.js .rec-slide.is-active { display: block; }
+.rec-nav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 14px; }
+.rec-btn { background: none; border: 1px solid var(--ink); color: var(--ink); border-radius: 4px; width: 42px; height: 32px; font: inherit; font-size: 15px; line-height: 1; cursor: pointer; }
+.rec-btn:hover:not(:disabled) { background: var(--ink); color: var(--paper); }
+.rec-btn:disabled { opacity: 0.3; cursor: default; }
+.rec-count { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+@media (max-width: 860px) { .rec-grid { grid-template-columns: 1fr; } .rec-stage { margin-top: 12px; } }
 
 /* Level key */
 .levels { margin: 0 0 20px; padding: 12px 0 14px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); display: grid; grid-template-columns: max-content 1fr; gap: 6px 18px; font-size: 14.5px; max-width: 72ch; }
@@ -264,25 +283,37 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
   </section>
 
   <section id="recordings">
-    <div class="kicker">Real recordings</div>
-    <h2>Watch it happen</h2>
-    <p class="sub">Three screen recordings from launch day, trimmed for length. The waiting has been sped up and nothing else has been changed. In the first, an assistant is handed the address from the card above and connects it. In the second, a designer asks a plain question about a homepage and gets a scored review back. In the third, a researcher hands over a study plan, and the rubric asks its questions before it will judge anything.</p>
-    <div class="vids">
-      <figure class="vid">
-        <div class="bar"><span class="who">Recording 1 · Adding the MCP · 0:43</span></div>
-        <video controls preload="none" playsinline width="1184" height="1556" poster="demo-add-mcp.jpg" src="demo-add-mcp.mp4"></video>
-        <figcaption class="cap"><p>One message with the address, and the assistant sets the connection up itself. No account, no key, and nothing to install. This was recorded in Muse; in Claude, ChatGPT, Cursor, or Grok, the same address goes into the connector settings listed above.</p></figcaption>
-      </figure>
-      <figure class="vid">
-        <div class="bar"><span class="who">Recording 2 · A homepage, scored · 0:52</span></div>
-        <video controls preload="none" playsinline width="1200" height="1340" poster="demo-homepage-review.jpg" src="demo-homepage-review.mp4"></video>
-        <figcaption class="cap"><p>The question is the one a designer would actually type, with no rubric named. The assistant chooses the Design Principles Score rubric, applies it to the screenshot, and lands on 72 out of 100, closing with the highest-impact fixes and the summary block.</p></figcaption>
-      </figure>
-      <figure class="vid">
-        <div class="bar"><span class="who">Recording 3 · A study plan, checked · 1:15</span></div>
-        <video controls preload="none" playsinline width="1080" height="1420" poster="demo-study-plan-review.jpg" src="demo-study-plan-review.mp4"></video>
-        <figcaption class="cap"><p>The same chat, a minute later. Before the Study Plan Review rubric will judge the plan, it asks for the context the plan is missing: who commissioned the study, what they already believe, and which decisions ride on it. Told to run anyway, it marks those gaps Missing rather than guessing, and the missing context is what holds the verdict at Not ready.</p></figcaption>
-      </figure>
+    <div class="rec-grid">
+      <div class="rec-text">
+        <div class="kicker">Real recordings</div>
+        <h2>Watch it happen</h2>
+        <p class="sub">Short screen recordings, trimmed for length, with the waiting sped up and nothing else changed. One shows an assistant connecting the library, one shows a designer asking a plain question about a homepage, and one shows a researcher handing over a study plan. Choose a scene and press play.</p>
+        <div class="rec-labels" role="group" aria-label="Choose a recording">
+          <button type="button" class="rec-label is-active" data-scene="0" aria-current="true"><span class="n">01</span><span class="name">Adding the MCP</span><span class="t">0:43</span></button>
+          <button type="button" class="rec-label" data-scene="1"><span class="n">02</span><span class="name">A homepage, scored</span><span class="t">0:52</span></button>
+          <button type="button" class="rec-label" data-scene="2"><span class="n">03</span><span class="name">A study plan, checked</span><span class="t">1:15</span></button>
+        </div>
+        <p class="rec-cap" id="rec-cap">One message with the address, and the assistant sets the connection up itself. No account, no key, and nothing to install. This was recorded in Muse; in Claude, ChatGPT, Cursor, or Grok, the same address goes into the connector settings listed above.</p>
+      </div>
+      <div class="rec-stage">
+        <figure class="vid rec-slide is-active">
+          <div class="bar"><span class="who">Recording 1 · Adding the MCP · 0:43</span></div>
+          <video controls preload="none" playsinline width="1184" height="1556" poster="demo-add-mcp.jpg" src="demo-add-mcp.mp4"></video>
+        </figure>
+        <figure class="vid rec-slide">
+          <div class="bar"><span class="who">Recording 2 · A homepage, scored · 0:52</span></div>
+          <video controls preload="none" playsinline width="1200" height="1340" poster="demo-homepage-review.jpg" src="demo-homepage-review.mp4"></video>
+        </figure>
+        <figure class="vid rec-slide">
+          <div class="bar"><span class="who">Recording 3 · A study plan, checked · 1:15</span></div>
+          <video controls preload="none" playsinline width="1080" height="1420" poster="demo-study-plan-review.jpg" src="demo-study-plan-review.mp4"></video>
+        </figure>
+        <div class="rec-nav">
+          <button type="button" class="rec-btn" id="rec-prev" aria-label="Previous recording">&#8592;</button>
+          <span class="rec-count" id="rec-count">Scene 1 of 3</span>
+          <button type="button" class="rec-btn" id="rec-next" aria-label="Next recording">&#8594;</button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -744,6 +775,44 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
     setTimeout(function () { if (!started && nearView()) showFinal(); }, 5000);
   } else { showFinal(); }
   document.getElementById("demo-replay").addEventListener("click", play);
+})();
+</script>
+<script>
+(function () {
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".rec-slide"));
+  if (!slides.length) return;
+  var labels = Array.prototype.slice.call(document.querySelectorAll(".rec-label"));
+  var cap = document.getElementById("rec-cap");
+  var count = document.getElementById("rec-count");
+  var prev = document.getElementById("rec-prev");
+  var next = document.getElementById("rec-next");
+  var caps = [
+    "One message with the address, and the assistant sets the connection up itself. No account, no key, and nothing to install. This was recorded in Muse; in Claude, ChatGPT, Cursor, or Grok, the same address goes into the connector settings listed above.",
+    "The question is the one a designer would actually type, with no rubric named. The assistant chooses the Design Principles Score rubric, applies it to the screenshot, and lands on 72 out of 100, closing with the highest-impact fixes and the summary block.",
+    "The same chat, a minute later. Before the Study Plan Review rubric will judge the plan, it asks for the context the plan is missing: who commissioned the study, what they already believe, and which decisions ride on it. Told to run anyway, it marks those gaps Missing rather than guessing, and the missing context is what holds the verdict at Not ready."
+  ];
+  var i = 0;
+  function go(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach(function (s, k) {
+      var on = k === i;
+      s.classList.toggle("is-active", on);
+      if (!on) { var v = s.querySelector("video"); if (v && !v.paused) v.pause(); }
+    });
+    labels.forEach(function (l, k) {
+      var on = k === i;
+      l.classList.toggle("is-active", on);
+      if (on) l.setAttribute("aria-current", "true"); else l.removeAttribute("aria-current");
+    });
+    if (cap) cap.textContent = caps[i];
+    if (count) count.textContent = "Scene " + (i + 1) + " of " + slides.length;
+    if (prev) prev.disabled = i === 0;
+    if (next) next.disabled = i === slides.length - 1;
+  }
+  labels.forEach(function (l, k) { l.addEventListener("click", function () { go(k); }); });
+  if (prev) prev.addEventListener("click", function () { go(i - 1); });
+  if (next) next.addEventListener("click", function () { go(i + 1); });
+  go(0);
 })();
 </script>
 </body>
