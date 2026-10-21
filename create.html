@@ -163,7 +163,7 @@ footer a { color: var(--accent); }
 <body>
 <div class="wrap">
 <header>
-  <img src="logo.png" alt="">
+  <img src="logo.png" alt="ProductRubric">
   <div class="name">ProductRubric</div>
   <nav aria-label="Primary"><a href="index.html#library">The library</a><a href="/create">Build a rubric</a><a class="btn" href="https://github.com/productrubric/product-rubric">GitHub</a></nav>
 </header>
@@ -2004,7 +2004,7 @@ function buildRubric(s) {
     if (s.sourceUrl) fm.push(`source_url: ${s.sourceUrl}`);
   }
   fm.push("---");
-  const out = [fm.join("\n"), "", "## Purpose", "", s.purpose || "(Not written yet.)"];
+  const out = [fm.join("\n"), "<!-- source: builder -->", "", "## Purpose", "", s.purpose || "(Not written yet.)"];
   if (s.procedureOn && s.procedure) {
     const steps = s.procedure.split("\n").map(l => l.trim()).filter(Boolean);
     out.push("", "## Procedure", "", steps.map((t, i) => `${i + 1}. ${t.replace(/^\d+[.)]\s*/, "")}`).join("\n"));
