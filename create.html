@@ -390,6 +390,9 @@ footer a { color: var(--accent); }
   <div class="card">
     <h2>Submit it to the library</h2>
     <p class="hint">The second way: share it. Your rubric goes into the review queue as a pull request on GitHub, credited to you.</p>
+    <div id="last-sub" hidden style="margin-bottom:14px; border:1px solid #e4ded2; padding:12px 14px">
+      <p class="fine" style="margin:0"><strong>Your last submission:</strong> <span id="last-sub-text"></span> <a id="last-sub-link" href="#" target="_blank" rel="noopener">View on GitHub</a> <button type="button" class="text-btn" id="last-sub-dismiss">Dismiss</button></p>
+    </div>
     <div class="actions">
       <button type="button" class="btn ink" id="submit-btn">Submit for review on GitHub</button>
       <p class="fine" id="submit-note"></p>
@@ -399,6 +402,11 @@ footer a { color: var(--accent); }
       <p class="fine" id="oc-signedout">Rather skip the two trips to GitHub? <button type="button" class="text-btn" id="oc-signin">Sign in with GitHub</button> and, once you are back, this page can open the pull request for you in one click, under your own account. Your draft is saved in this browser, so leaving to sign in loses nothing.</p>
       <p class="fine" id="oc-signedin" hidden>You are signed in with GitHub. <button type="button" class="btn ink" id="oc-submit">Submit in one click</button> <button type="button" class="text-btn" id="oc-signout">Sign out</button></p>
       <p class="fine" id="oc-status"></p>
+      <div id="oc-done" hidden style="margin-top:14px; border-top:1px solid #e4ded2; padding-top:14px">
+        <p style="margin:0 0 6px"><strong>Submitted.</strong> <span id="oc-done-text"></span></p>
+        <p class="fine" style="margin:0 0 8px">The maintainer reviews every submission. GitHub emails you when anything happens on it, and the note at the top of this section keeps the link and its status here.</p>
+        <p style="margin:0"><a id="oc-done-link" href="#" target="_blank" rel="noopener" style="font-weight:700">View your submission on GitHub</a></p>
+      </div>
     </div>
     <div class="after" style="margin-top:18px">
       <h4>What happens after you submit</h4>
@@ -2409,6 +2417,32 @@ function init() {
   $("dl-rubric-2").addEventListener("click", () => {
     readForm(); download(new Blob([buildRubric(state)], { type: "text/markdown" }), `${state.id || "rubric"}.md`);
   });
+  /* ---------- Last submission: remembered, with its live state ---------- */
+  function renderLastSub() {
+    let rec = null;
+    try { rec = JSON.parse(localStorage.getItem("pr-last-submission") || "null"); } catch (e) {}
+    if (!rec || !rec.url) { $("last-sub").hidden = true; return; }
+    $("last-sub").hidden = false;
+    $("last-sub-link").href = rec.url;
+    const base = rec.title + " \u00b7 sent " + rec.at;
+    $("last-sub-text").textContent = base;
+    if (rec.number) {
+      fetch("https://api.github.com/repos/productrubric/product-rubric/pulls/" + rec.number)
+        .then(r => (r.ok ? r.json() : null))
+        .then(pr => {
+          if (!pr) return;
+          const word = pr.merged ? "in the library" : pr.state === "open" ? "in review" : "closed";
+          $("last-sub-text").textContent = base + " \u00b7 " + word;
+        })
+        .catch(() => {});
+    }
+  }
+  $("last-sub-dismiss").addEventListener("click", () => {
+    try { localStorage.removeItem("pr-last-submission"); } catch (e) {}
+    $("last-sub").hidden = true;
+  });
+  renderLastSub();
+
   /* ---------- One-click submit through the submission helper ---------- */
   const ocStatus = $("oc-status");
   function ocShowSignedIn() {
@@ -2461,8 +2495,17 @@ function init() {
         ghToken = null;
         ocShowSignedOut("That sign-in has expired. Sign in again to submit in one click, or use the button above.");
       } else if (data.ok) {
-        $("oc-signedin").hidden = true;
-        ocStatus.innerHTML = "Submitted. Your pull request is open: <a href=\"" + data.prUrl + "\" target=\"_blank\" rel=\"noopener\">" + data.prUrl + "</a>. The maintainer reviews every submission, and GitHub emails you when anything happens on it.";
+        const rec = { title: s.name || s.id, url: data.prUrl, number: (data.prUrl.match(/\/pull\/(\d+)/) || [])[1] || "", at: new Date().toISOString().slice(0, 10) };
+        try { localStorage.setItem("pr-last-submission", JSON.stringify(rec)); } catch (e) {}
+        ocStatus.textContent = "";
+        $("oc-done-text").textContent = rec.title + " is in the review queue. The form has been cleared, so nothing can be sent twice by accident.";
+        $("oc-done-link").href = data.prUrl;
+        $("oc-done").hidden = false;
+        renderLastSub();
+        try { localStorage.removeItem("pr-builder-draft-v1"); } catch (e) {}
+        engaged = false;
+        state = blankState(); idEdited = false; fillForm(state); setMode("blank");
+        $("saved-note").textContent = "Submitted and cleared. The form is blank again.";
       } else {
         ocStatus.textContent = data.error || "The submission did not go through. The button above sends the same two files the other way.";
       }
