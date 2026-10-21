@@ -266,10 +266,25 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
     <p>ProductRubric is an open library of evaluation rubrics that replaces the improvisation. Your AI assistant applies a rubric to the work itself, a screen, a design board, a study plan, a questionnaire, or a readout, and returns a structured review, the same shape of review in Claude, ChatGPT, Grok, Cursor, or any other tool, every time.</p>
     </div>
     <div class="hero-visual">
-      <div class="cap">From the library</div>
+      <div class="cap">Highlights from the library</div>
       <div class="rstack" id="rstack">
-        <a class="rcard on" href="#rubric-positioning-review">
-          <div class="rtop"><span class="rcat">Product marketing</span><span class="rcount">1 / 5</span></div>
+        <a class="rcard on" href="#rubric-usability-heuristics-review">
+          <div class="rtop"><span class="rcat">Design</span><span class="rcount">1 / 5</span></div>
+          <h3>Usability Heuristics Review</h3>
+          <p class="rsum">Evaluates a screen or flow against the ten usability heuristics published by Jakob Nielsen, reporting problems with severity ratings.</p>
+          <ul>
+            <li><span class="sq"></span>Visibility of system status</li>
+            <li><span class="sq"></span>Match between the system and the real world</li>
+            <li><span class="sq"></span>User control and freedom</li>
+          </ul>
+          <div class="rfoot">
+            <div class="rscale">PROBLEMS RATED 0–4 BY SEVERITY</div>
+            <div class="rcredit">Based on <em>10 Usability Heuristics for User Interface Design</em> by Jakob Nielsen</div>
+            <div class="rgo">See it in the library ↓</div>
+          </div>
+        </a>
+        <a class="rcard" href="#rubric-positioning-review">
+          <div class="rtop"><span class="rcat">Marketing</span><span class="rcount">2 / 5</span></div>
           <h3>Positioning Review</h3>
           <p class="rsum">Reviews a positioning document against the five components of effective positioning.</p>
           <ul>
@@ -283,23 +298,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
             <div class="rgo">See it in the library ↓</div>
           </div>
         </a>
-        <a class="rcard" href="#rubric-design-quality">
-          <div class="rtop"><span class="rcat">Product design</span><span class="rcount">2 / 5</span></div>
-          <h3>Design Quality</h3>
-          <p class="rsum">Reviews a design submission against seven dimensions of professional design quality, the way a design leader would in a critique.</p>
-          <ul>
-            <li><span class="sq"></span>Right problem</li>
-            <li><span class="sq"></span>Grounded in evidence</li>
-            <li><span class="sq"></span>Holds together as a system</li>
-          </ul>
-          <div class="rfoot">
-            <div class="rscale">SCORED 0–100</div>
-            <div class="rcredit">By David Nguyen</div>
-            <div class="rgo">See it in the library ↓</div>
-          </div>
-        </a>
         <a class="rcard" href="#rubric-user-story-review">
-          <div class="rtop"><span class="rcat">Product management</span><span class="rcount">3 / 5</span></div>
+          <div class="rtop"><span class="rcat">Management</span><span class="rcount">3 / 5</span></div>
           <h3>User Story Review</h3>
           <p class="rsum">Reviews a user story and its acceptance criteria, judging whether the story is valuable to a named user, small and independent enough to build, and estimable from what is written.</p>
           <ul>
@@ -314,7 +314,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
           </div>
         </a>
         <a class="rcard" href="#rubric-inclusive-design-audit">
-          <div class="rtop"><span class="rcat">Product design</span><span class="rcount">4 / 5</span></div>
+          <div class="rtop"><span class="rcat">Design</span><span class="rcount">4 / 5</span></div>
           <h3>Inclusive Design Audit</h3>
           <p class="rsum">Audits a screen or flow against five inclusive design principles for cultural fit, checking who the design includes and who it unintentionally leaves out.</p>
           <ul>
@@ -329,7 +329,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
           </div>
         </a>
         <a class="rcard" href="#rubric-accessibility-review">
-          <div class="rtop"><span class="rcat">Product design</span><span class="rcount">5 / 5</span></div>
+          <div class="rtop"><span class="rcat">Design</span><span class="rcount">5 / 5</span></div>
           <h3>Accessibility Review</h3>
           <p class="rsum">Reviews a screen's design for accessibility problems that are visible in a screenshot or description, judged against criteria derived from WCAG 2.2.</p>
           <ul>
@@ -456,6 +456,20 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
       <dt><span class="lvl lvl-standard">Standard</span></dt><dd>One screen or flow, judged against structured criteria, with a fuller report.</dd>
       <dt><span class="lvl lvl-deep">Deep</span></dt><dd>Needs more than the artifact itself, such as a full board with its rationale, or context the rubric asks you for before it judges.</dd>
     </dl>
+    <details class="rubric" id="rubric-usability-heuristics-review">
+      <summary>
+        <span class="title">Usability Heuristics Review</span>
+        <span class="level" data-tip="Standard: one screen or flow, judged against structured criteria, with a fuller report.">Standard</span>
+        <span class="short">Evaluates a screen or flow against the ten usability heuristics published by Jakob Nielsen.</span>
+        <span class="chev"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </summary>
+      <div class="meta">
+        <p>Evaluates a screen or flow against the ten usability heuristics published by Jakob Nielsen, reporting problems with severity ratings.</p>
+        <p><strong>When to use it:</strong> A structured usability inspection of a screen or flow by its design alone, the classic heuristic evaluation, when no users are available yet or before testing with users is scheduled.</p>
+        <p><strong>What you provide:</strong> Screenshots of the screen or the flow's screens in order, or a description detailed enough to name the states, messages, and actions. State the product's context (what it is, who uses it) when the screens do not make it obvious.</p>
+        <p><strong>How it reports:</strong> No overall score; every problem rated 0-4 on the severity scale defined in the Scoring section</p>
+      </div>
+    </details>
     <details class="rubric">
       <summary>
         <span class="title">Design Principles Score</span>
