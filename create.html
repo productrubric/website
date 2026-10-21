@@ -395,6 +395,11 @@ footer a { color: var(--accent); }
       <p class="fine" id="submit-note"></p>
       <p id="submit-restart-wrap" hidden><button type="button" class="text-btn" id="submit-restart">Start the submission over</button></p>
     </div>
+    <div id="oneclick" style="margin-top:16px; border-top:1px solid #e4ded2; padding-top:14px">
+      <p class="fine" id="oc-signedout">Rather skip the two trips to GitHub? <button type="button" class="text-btn" id="oc-signin">Sign in with GitHub</button> and, once you are back, this page can open the pull request for you in one click, under your own account. Your draft is saved in this browser, so leaving to sign in loses nothing.</p>
+      <p class="fine" id="oc-signedin" hidden>You are signed in with GitHub. <button type="button" class="btn ink" id="oc-submit">Submit in one click</button> <button type="button" class="text-btn" id="oc-signout">Sign out</button></p>
+      <p class="fine" id="oc-status"></p>
+    </div>
     <div class="after" style="margin-top:18px">
       <h4>What happens after you submit</h4>
       <ol>
@@ -2404,6 +2409,69 @@ function init() {
   $("dl-rubric-2").addEventListener("click", () => {
     readForm(); download(new Blob([buildRubric(state)], { type: "text/markdown" }), `${state.id || "rubric"}.md`);
   });
+  /* ---------- One-click submit through the submission helper ---------- */
+  const ocStatus = $("oc-status");
+  function ocShowSignedIn() {
+    $("oc-signedout").hidden = true;
+    $("oc-signedin").hidden = false;
+  }
+  function ocShowSignedOut(msg) {
+    $("oc-signedout").hidden = false;
+    $("oc-signedin").hidden = true;
+    if (msg) ocStatus.textContent = msg;
+  }
+  if (location.hash.indexOf("#t=") === 0) {
+    try { sessionStorage.setItem("pr_gh_token", decodeURIComponent(location.hash.slice(3))); } catch (e) {}
+    history.replaceState(null, "", location.pathname + location.search);
+  }
+  let ghToken = null;
+  try { ghToken = sessionStorage.getItem("pr_gh_token"); } catch (e) {}
+  if (ghToken) ocShowSignedIn();
+  $("oc-signin").addEventListener("click", () => {
+    location.href = "https://submit.productrubric.com/auth/start?next=builder";
+  });
+  $("oc-signout").addEventListener("click", () => {
+    try { sessionStorage.removeItem("pr_gh_token"); } catch (e) {}
+    ghToken = null;
+    ocShowSignedOut("Signed out. The button above still works without signing in.");
+  });
+  $("oc-submit").addEventListener("click", async () => {
+    const s = state;
+    const cat = categoryOf(s);
+    if (!s.id || !cat) { ocStatus.textContent = "Give the rubric its file name and category above first; the submission needs both."; return; }
+    if (!s.example) { ocStatus.textContent = "Add the worked example above first. A submission is the same two files either way; this button simply sends them together."; return; }
+    const btn = $("oc-submit");
+    btn.disabled = true;
+    ocStatus.textContent = "Sending both files to GitHub under your account. This takes a few seconds while your fork and the pull request are prepared.";
+    try {
+      const res = await fetch("https://submit.productrubric.com/submit", {
+        method: "POST",
+        headers: { "content-type": "application/json", authorization: "Bearer " + ghToken },
+        body: JSON.stringify({
+          rubricPath: `rubrics/${cat}/${s.id}.md`,
+          rubricContent: buildRubric(s),
+          examplePath: `examples/${cat}/${s.id}.md`,
+          exampleContent: exampleFile(s),
+          title: `Add the ${s.name || s.id} rubric`
+        })
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.status === 401) {
+        try { sessionStorage.removeItem("pr_gh_token"); } catch (e) {}
+        ghToken = null;
+        ocShowSignedOut("That sign-in has expired. Sign in again to submit in one click, or use the button above.");
+      } else if (data.ok) {
+        $("oc-signedin").hidden = true;
+        ocStatus.innerHTML = "Submitted. Your pull request is open: <a href=\"" + data.prUrl + "\" target=\"_blank\" rel=\"noopener\">" + data.prUrl + "</a>. The maintainer reviews every submission, and GitHub emails you when anything happens on it.";
+      } else {
+        ocStatus.textContent = data.error || "The submission did not go through. The button above sends the same two files the other way.";
+      }
+    } catch (e) {
+      ocStatus.textContent = "The submission did not go through. Check your connection and try again, or use the button above.";
+    }
+    btn.disabled = false;
+  });
+
   $("submit-btn").addEventListener("click", () => {
     readForm();
     if ((state.submitStep || 0) === 2) { window.open("https://github.com/pulls", "_blank"); return; }
