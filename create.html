@@ -107,6 +107,10 @@ div.card .actions { max-width: 430px; }
 .panel pre { margin: 0; padding: 14px 16px; max-height: 430px; overflow: auto; font-family: var(--mono); font-size: 11.5px; line-height: 1.55; white-space: pre-wrap; word-break: break-word; background: #fff; }
 .checklist { list-style: none; margin: 0; padding: 0; }
 .checklist li { display: flex; gap: 9px; padding: 5px 0; font-size: 14px; align-items: flex-start; }
+.checklist li[data-key] { cursor: pointer; border-radius: 4px; margin-left: -6px; margin-right: -6px; padding-left: 6px; padding-right: 6px; }
+.checklist li[data-key]:hover { background: var(--hover); }
+.checklist li[data-key]:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.flash { outline: 2px solid var(--accent) !important; outline-offset: 3px; }
 .checklist .mark { flex: none; width: 19px; height: 19px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; margin-top: 1px; }
 .checklist li.ok .mark { background: var(--ok); color: #fff; }
 .checklist li.no .mark { background: #fff; color: #b3261e; border: 1.5px solid #b3261e; }
@@ -392,6 +396,7 @@ footer a { color: var(--accent); }
     <h3>Checklist <span class="rail-progress" id="rail-progress"></span><button type="button" id="rail-toggle" aria-expanded="false">Show</button></h3>
     <div class="inner">
       <noscript><p class="fine">This checklist runs in your browser and needs JavaScript. It applies the same rules the library's validator runs on every submission.</p></noscript>
+      <p class="fine">Tap any item to jump to that part of the form.</p>
       <ul class="checklist" id="checklist"></ul>
       <p class="fine">The required section is the same set of rules the library's own validator runs on every pull request, so a file that passes here passes there.</p>
     </div>
@@ -1925,32 +1930,32 @@ function buildRubric(s) {
 /** The same rules scripts/validate.mjs runs, plus builder-only warnings. */
 function validateState(s, rubricText) {
   const req = [], warn = [];
-  const need = (ok, label) => req.push({ ok: !!ok, label });
-  need(s.name, "The rubric has a name");
-  need(s.id && KEBAB.test(s.id), "The file name is lowercase with hyphens" + (s.id ? ` (${s.id}.md)` : ""));
-  need(categoryOf(s), "A category is chosen");
-  need(s.summary, "One sentence says what it evaluates");
-  need(s.whenToUse, "When to reach for it is written");
-  need(s.inputs, "What the AI needs is stated");
-  need(s.scale, "The scale is stated in short form");
+  const need = (ok, label, key) => req.push({ ok: !!ok, label, key });
+  need(s.name, "The rubric has a name", "name");
+  need(s.id && KEBAB.test(s.id), "The file name is lowercase with hyphens" + (s.id ? ` (${s.id}.md)` : ""), "id");
+  need(categoryOf(s), "A category is chosen", "category");
+  need(s.summary, "One sentence says what it evaluates", "summary");
+  need(s.whenToUse, "When to reach for it is written", "when");
+  need(s.inputs, "What the AI needs is stated", "inputs");
+  need(s.scale, "The scale is stated in short form", "scale");
   need(LEVELS.includes(effectiveLevel(s)), s.level === "auto"
     ? `The depth is set (you picked "not sure", so the builder suggests ${effectiveLevel(s)} and marks it in the file for a reviewer to confirm)`
-    : "The depth (simple, standard, or deep) is set");
-  need(s.purpose, "The Purpose section is written");
+    : "The depth (simple, standard, or deep) is set", "level");
+  need(s.purpose, "The Purpose section is written", "purpose");
   need(s.criteria.length >= 1 && s.criteria.every(c => c.name && c.examine && c.good && c.bad),
-    "Every criterion has a name, what to examine, what good looks like, and what bad looks like");
-  need(s.scoring, "The Scoring section is written");
-  need(s.output, "The Output format section is written");
-  need(Object.values(s.honesty).some(Boolean) || s.honestyCustom, "At least one honesty rule is set");
+    "Every criterion has a name, what to examine, what good looks like, and what bad looks like", "criteria");
+  need(s.scoring, "The Scoring section is written", "scoring");
+  need(s.output, "The Output format section is written", "output");
+  need(Object.values(s.honesty).some(Boolean) || s.honestyCustom, "At least one honesty rule is set", "honesty");
   if (s.sourceOn) need(s.sourceUrl ? rubricText.includes("## Sources") && s.sourceAuthor && s.sourceTitle : true,
-    "A credited source carries its author, title, and link, and the file ends with a Sources section");
+    "A credited source carries its author, title, and link, and the file ends with a Sources section", "source");
   const known = (window.RUBRIC_DATA || []).some(r => r.id === s.id);
-  if (known) warn.push({ ok: false, label: "This file name already exists in the library. Give your version its own name before submitting, or the pull request would replace the original file." });
+  if (known) warn.push({ ok: false, key: "id", label: "This file name already exists in the library. Give your version its own name before submitting, or the pull request would replace the original file." });
   if (s.criteria.length > 0 && (s.criteria.length < 3 || s.criteria.length > 7))
-    warn.push({ ok: false, label: `You have ${s.criteria.length} criteria. Most rubrics carry three to seven; more than that usually means two rubrics wearing one coat.` });
-  if (!s.author) warn.push({ ok: false, label: "No author name yet. Fine for your own use, but a library submission credits its author, so add yours before you submit." });
-  if (s.sourceOn && !s.sourceTakes) warn.push({ ok: false, label: "Say what the rubric takes from its source, in your own words, so the credit is complete." });
-  if (!s.example) warn.push({ ok: false, label: "No worked example yet. A library contribution includes one; your own use does not need it." });
+    warn.push({ ok: false, key: "criteria", label: `You have ${s.criteria.length} criteria. Most rubrics carry three to seven; more than that usually means two rubrics wearing one coat.` });
+  if (!s.author) warn.push({ ok: false, key: "author", label: "No author name yet. Fine for your own use, but a library submission credits its author, so add yours before you submit." });
+  if (s.sourceOn && !s.sourceTakes) warn.push({ ok: false, key: "takes", label: "Say what the rubric takes from its source, in your own words, so the credit is complete." });
+  if (!s.example) warn.push({ ok: false, key: "example", label: "No worked example yet. A library contribution includes one; your own use does not need it." });
   return { req, warn };
 }
 </script>
@@ -2086,6 +2091,7 @@ function updateLevelHint() {
     ? ` From your answers so far, this looks ${suggestion}. The choice is yours.` : "");
 }
 let saveTimer = null;
+let engaged = false;
 function refresh() {
   readForm();
   updateLevelHint();
@@ -2094,10 +2100,10 @@ function refresh() {
   const text = buildRubric(s);
   $("preview").textContent = text;
   const v = validateState(s, text);
-  const li = (item, cls) => `<li class="${cls}"><span class="mark">${cls === "ok" ? "✓" : cls === "warn" ? "!" : "×"}</span><span>${item.label}</span></li>`;
+  const li = (item, cls) => `<li class="${cls}"${item.key ? ` data-key="${item.key}" tabindex="0" title="Jump to this part of the form"` : ""}><span class="mark">${cls === "ok" ? "✓" : cls === "warn" ? "!" : "×"}</span><span>${item.label}</span></li>`;
   $("checklist").innerHTML =
     `<li class="group">Required by the format</li>` + v.req.map(i => li(i, i.ok ? "ok" : "no")).join("") +
-    (v.warn.length ? `<li class="group">Worth fixing</li>` + v.warn.map(i => li(i, "warn")).join("") : "");
+    (engaged && v.warn.length ? `<li class="group">Worth fixing</li>` + v.warn.map(i => li(i, "warn")).join("") : "");
   const failing = v.req.filter(i => !i.ok).length;
   $("file-stats").textContent = `${s.id || "your-rubric"}.md · ${text.split("\n").length} lines · ${v.req.length - failing} of ${v.req.length} required checks passing`;
   $("rail-progress").textContent = `${v.req.length - failing}/${v.req.length} checks`;
@@ -2174,9 +2180,53 @@ function remixState(entry) {
   return s;
 }
 function setMode(mode) {
+  if (mode === "remix") engaged = true;
   for (const m of ["blank", "remix"]) $("mode-" + m).setAttribute("aria-pressed", m === mode ? "true" : "false");
   $("remix-panel").hidden = mode !== "remix";
   refresh();
+}
+function flash(el) {
+  const box = el.closest(".crit") || el.closest("fieldset") || el;
+  box.classList.add("flash");
+  setTimeout(() => box.classList.remove("flash"), 1500);
+}
+function focusField(el) {
+  if (!el) return;
+  try { el.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) {}
+  flash(el);
+  setTimeout(() => { try { el.focus({ preventScroll: true }); } catch (e) { try { el.focus(); } catch (e2) {} } }, 300);
+}
+function jumpTo(key) {
+  if (window.innerWidth <= 980) {
+    const side = document.querySelector(".side");
+    if (side.classList.contains("open")) {
+      side.classList.remove("open");
+      $("rail-toggle").textContent = "Show";
+      $("rail-toggle").setAttribute("aria-expanded", "false");
+    }
+  }
+  const simple = { name: "f-name", id: "f-id", category: "f-category", summary: "f-summary", when: "f-when", inputs: "f-inputs", scale: "f-scale", level: "f-level", purpose: "f-purpose", scoring: "f-scoring", output: "f-output", author: "f-author", example: "f-example", takes: "f-source-takes" };
+  if (key === "level") { focusField(document.querySelector('input[name="level"]')); return; }
+  if (key === "honesty") { focusField(document.querySelector("[data-honesty]")); return; }
+  if (key === "source") {
+    for (const id of ["f-source-author", "f-source-title", "f-source-url"]) {
+      const el = $(id);
+      if (el && !el.value.trim()) { focusField(el); return; }
+    }
+    focusField($("f-source-author"));
+    return;
+  }
+  if (key === "criteria") {
+    for (const card of document.querySelectorAll("#criteria-list .crit")) {
+      for (const f of ["name", "examine", "good", "bad"]) {
+        const el = card.querySelector(`[data-k="${f}"]`);
+        if (el && !el.value.trim()) { focusField(el); return; }
+      }
+    }
+    focusField(document.querySelector('#criteria-list .crit [data-k="name"]'));
+    return;
+  }
+  focusField($(simple[key]));
 }
 function init() {
   state = blankState();
@@ -2195,7 +2245,7 @@ function init() {
     if (raw) { state = Object.assign(blankState(), JSON.parse(raw)); restored = true; }
   } catch (e) {}
   fillForm(state);
-  if (restored) $("saved-note").textContent = "Draft restored from this browser. It saves here as you type.";
+  if (restored) { engaged = true; $("saved-note").textContent = "Draft restored from this browser. It saves here as you type."; }
   $("mode-blank").addEventListener("click", () => {
     const keep = { author: state.author, authorUrl: state.authorUrl };
     state = Object.assign(blankState(), keep); idEdited = false; fillForm(state); setMode("blank");
@@ -2220,8 +2270,16 @@ function init() {
     refresh();
   });
   document.querySelectorAll('input[name="level"]').forEach(r => r.addEventListener("change", updateLevelHint));
-  $("builder").addEventListener("input", refresh);
-  $("builder").addEventListener("change", refresh);
+  $("builder").addEventListener("input", () => { engaged = true; refresh(); });
+  $("builder").addEventListener("change", () => { engaged = true; refresh(); });
+  $("builder").addEventListener("focusin", () => { if (!engaged) { engaged = true; refresh(); } });
+  $("checklist").addEventListener("click", e => {
+    const item = e.target.closest("li[data-key]");
+    if (item) jumpTo(item.dataset.key);
+  });
+  $("checklist").addEventListener("keydown", e => {
+    if ((e.key === "Enter" || e.key === " ") && e.target.matches("li[data-key]")) { e.preventDefault(); jumpTo(e.target.dataset.key); }
+  });
   $("dl-rubric").addEventListener("click", () => {
     readForm(); download(new Blob([buildRubric(state)], { type: "text/markdown" }), `${state.id || "rubric"}.md`);
   });
@@ -2299,6 +2357,7 @@ function init() {
     btn.textContent = "Clear the saved draft and start over";
     btn.classList.remove("arming");
     try { localStorage.removeItem("pr-builder-draft-v1"); } catch (e) {}
+    engaged = false;
     state = blankState(); idEdited = false; fillForm(state); setMode("blank");
     $("saved-note").textContent = "Draft cleared. The form is blank again.";
   });
