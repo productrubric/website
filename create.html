@@ -50,21 +50,7 @@ header nav a.btn:hover { background: #33302d; }
 .kicker { font-family: var(--mono); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent); margin-bottom: 8px; }
 .intro h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(32px, 5vw, 46px); line-height: 1.08; letter-spacing: -0.015em; margin: 0 0 22px; }
 .intro p { font-size: 17.5px; color: #2b2b2e; margin: 0 0 12px; }
-.intro p.outcome { font-family: var(--serif); font-size: 21px; font-weight: 600; line-height: 1.35; color: var(--ink); margin: 20px 0 0; max-width: 720px; }
-.paths { display: grid; grid-template-columns: 1fr 1fr; margin: 18px 0 4px; border: 2px solid var(--ink); border-top: 6px solid var(--accent); border-radius: 4px; background: var(--card); overflow: hidden; }
-.path-col { padding: 20px 24px 8px; }
-.path-col + .path-col { border-left: 1px solid var(--line); }
-.path-col h2 { font-family: var(--serif); font-size: 20px; font-weight: 600; margin: 0 0 6px; }
-.path-col p { font-size: 15.5px; margin: 0 0 12px; color: #2b2b2e; }
-@media (max-width: 640px) { .paths { grid-template-columns: 1fr; } .path-col + .path-col { border-left: 0; border-top: 1px solid var(--line); } }
-.modes { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 6px; }
-.mode-btn { font: inherit; font-weight: 700; font-size: 14.5px; padding: 10px 18px; border-radius: 4px; border: 1.5px solid var(--ink); background: var(--paper); color: var(--ink); cursor: pointer; }
-.mode-btn[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
-.mode-btn:hover { background: var(--hover); }
-.mode-btn[aria-pressed="true"]:hover { background: #84211f; }
-.mode-panel { margin: 6px 0 0; padding: 14px 16px; background: var(--tint); border: 1px solid var(--line); border-radius: 4px; }
-.mode-panel p { margin: 0 0 10px; font-size: 15px; }
-.layout { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 34px; align-items: start; margin-top: 26px; }
+@media (max-width: 640px) { .layout { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 34px; align-items: start; margin-top: 26px; }
 @media (max-width: 980px) { .layout { grid-template-columns: 1fr; } }
 fieldset.card { border: 2px solid var(--ink); border-top: 2px solid var(--accent); border-radius: 4px; background: var(--card); padding: 22px 24px 8px; margin: 0 0 26px; }
 fieldset.card legend { font-family: var(--serif); font-size: 21px; font-weight: 600; padding: 2px 10px; margin-left: 4px; background: var(--card); }
@@ -156,6 +142,20 @@ dialog#file-dialog .dlg-head h3 { margin: 0; font-family: var(--serif); font-siz
 dialog#file-dialog pre { margin: 0; padding: 16px 18px; max-height: 58vh; overflow: auto; font-family: var(--mono); font-size: 12px; line-height: 1.55; white-space: pre-wrap; word-break: break-word; }
 dialog#file-dialog .dlg-foot { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; padding: 14px 18px; border-top: 1px solid var(--line); }
 dialog#file-dialog .dlg-foot .btn { width: auto; padding: 9px 16px; font-size: 14px; }
+
+.tabs { display: flex; gap: 28px; border-bottom: 1px solid var(--line); margin: 30px 0 0; }
+.tab { font: inherit; font-weight: 700; font-size: 16.5px; background: none; border: 0; border-bottom: 3px solid transparent; margin-bottom: -1px; padding: 10px 2px; cursor: pointer; color: var(--muted); }
+.tab:hover { color: var(--ink); }
+.tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+.tab-panel { padding-top: 8px; max-width: 760px; }
+.tab-panel a, #last-sub a, #oc-done a { color: var(--accent); }
+.panel-h { font-family: var(--serif); font-size: 24px; font-weight: 600; margin: 18px 0 10px; }
+.panel-p { font-size: 16px; }
+.panel-p code, .tab-panel code { font-family: var(--mono); font-size: 0.88em; background: var(--hover); padding: 1px 5px; border-radius: 3px; }
+.startfrom { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 22px 0 2px; }
+.startfrom label { font-weight: 700; font-size: 15px; }
+.startfrom select { font: inherit; padding: 9px 11px; border: 1px solid var(--ink); border-radius: 4px; background: #fff; min-width: 260px; }
+.startfrom .fine { flex-basis: 100%; margin: 0; }
 footer { border-top: 2px solid var(--ink); margin-top: 60px; padding: 26px 0 46px; color: var(--muted); font-size: 14px; }
 footer a { color: var(--accent); }
 </style>
@@ -170,33 +170,53 @@ footer a { color: var(--accent); }
 
 <div class="intro">
   <div class="kicker">Make your own</div>
-  <h1>Build a rubric without touching GitHub.</h1>
-  <p>A rubric is one Markdown file with a set of criteria, a scoring scale, an output format, and honesty rules. This page asks you plain questions and writes that file for you as you go. Nothing you type leaves your browser until you choose to download or submit something.</p>
-  <p class="outcome">When it is ready, the file is yours either way. Download it and use it with your own AI, or submit it to the library and share it with everyone.</p>
+  <h1>Make a rubric, use it yourself, or add it to the open source library.</h1>
+  <p>A rubric is one Markdown file with a set of criteria, a scoring scale, an output format, and honesty rules. You can build one here with a guided form, write the files yourself, or have your AI draft it for you. Nothing leaves your browser until you choose to download or submit something.</p>
+  
 </div>
 
-<div class="paths">
-  <div class="path-col">
-    <h2>Use it yourself</h2>
-    <p>Download the rubric file, or the installable Skill package, and run it in your own AI. Nothing is published, no account is needed, and the file is yours to keep and change.</p>
-  </div>
-  <div class="path-col">
-    <h2>Contribute it to the library</h2>
-    <p>Submit it for review. If it is accepted, your rubric joins the open library on this site and in the MCP, credited to you as its author, and anyone can use it, remix it, and build on it.</p>
-  </div>
+<div class="tabs" role="tablist" aria-label="How to make your rubric">
+  <button type="button" class="tab" role="tab" data-route="build" aria-selected="true">Build it here</button>
+  <button type="button" class="tab" role="tab" data-route="files" aria-selected="false">Write the files</button>
+  <button type="button" class="tab" role="tab" data-route="ai" aria-selected="false">Use your AI</button>
 </div>
-<div class="modes" role="group" aria-label="How to start">
-  <button type="button" class="mode-btn" id="mode-blank" aria-pressed="true">Start blank</button>
-  <button type="button" class="mode-btn" id="mode-remix" aria-pressed="false">Remix a library rubric</button>
-</div>
-<div class="mode-panel" id="remix-panel" hidden>
-  <p>Pick a rubric from the library. Its criteria, scoring, and wording load into the form below, and you edit from there. Give your version its own name before you submit it, so it does not collide with the original.</p>
-  <div class="field" style="margin:0">
-    <label for="remix-select">Library rubric</label>
-    <select id="remix-select"></select>
+<div class="tab-panel" id="tp-files" hidden>
+  <h2 class="panel-h">Write the two files yourself</h2>
+  <p class="panel-p">Every rubric in the library is two Markdown files: the rubric, at <code>rubrics/&lt;category&gt;/&lt;rubric-id&gt;.md</code>, and one worked example showing it run, at <code>examples/&lt;category&gt;/&lt;rubric-id&gt;.md</code>. Both follow a published format: a short block of frontmatter, then Purpose, Criteria, Scoring, Output format, and Honesty rules, in that order.</p>
+  <div class="after">
+    <ol>
+      <li>Read <a href="https://github.com/productrubric/product-rubric/blob/main/FORMAT.md" target="_blank" rel="noopener">the format</a> and <a href="https://github.com/productrubric/product-rubric/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">the contributing guide</a>. The worked example is required, not decoration: it is how reviewers see the rubric actually judge something.</li>
+      <li>Fork <a href="https://github.com/productrubric/product-rubric" target="_blank" rel="noopener">the repository</a>, add both files on a branch of your fork, in your own editor.</li>
+      <li>Open a pull request against main. The repository runs the same validator this page uses as a check on every pull request, and the maintainer reviews every submission.</li>
+    </ol>
   </div>
+  <p class="panel-p">That is the whole route. No account on this site, nothing installed, and your files stay exactly as you wrote them.</p>
+</div>
+<div class="tab-panel" id="tp-ai" hidden>
+  <h2 class="panel-h">Have your AI draft it, in your own chat</h2>
+  <p class="panel-p">The library also lives on an MCP server, and one of its prompts writes rubrics. Connect any AI assistant that supports MCP prompts to <code>https://mcp.productrubric.com/mcp</code> and start the prompt named <strong>Author a rubric</strong>.</p>
+  <div class="after">
+    <ol>
+      <li>It interviews you in one round: what the rubric reviews, when it runs, and whether it rests on a published framework. It checks the library first, so you do not draft a duplicate by accident.</li>
+      <li>It drafts both files to the same format the other two routes use, checks its own work against the validator's rules, and writes the worked example by actually running the draft.</li>
+      <li>It finishes by handing you the two finished files. Bring them back to the Build it here tab and choose Import a draft in the Start from list: the form reads them in, runs the library's checks on them, and submits them in one click once you sign in with GitHub.</li>
+    </ol>
+  </div>
+  <p class="panel-p">The rubric that comes back is yours to read and change before anything is submitted. The AI drafts; you decide.</p>
+</div>
+<div class="startfrom" id="startfrom-row">
+  <label for="start-from">Start from</label>
+  <select id="start-from"><option value="blank">Blank</option><option value="import">Import a draft your AI wrote…</option></select>
+  <span class="fine">Blank, or a library rubric loaded into the form for you to edit into your own. Give a remix its own name before submitting it.</span>
 </div>
 
+<div id="import-panel" style="display:none; margin: 6px 0 10px; border: 1px solid #e4ded2; padding: 16px 18px;">
+  <p class="fine" style="margin:0 0 10px">Paste the two files your AI produced, or pick them from your computer. The form reads them in below, where the checklist and the preview show you exactly what will be submitted.</p>
+  <div class="field"><label for="imp-rubric">The rubric file</label><textarea id="imp-rubric" style="min-height:110px" spellcheck="false"></textarea><input type="file" id="imp-rubric-file" accept=".md,.txt"></div>
+  <div class="field"><label for="imp-example">The worked example file</label><textarea id="imp-example" style="min-height:90px" spellcheck="false"></textarea><input type="file" id="imp-example-file" accept=".md,.txt"></div>
+  <p style="margin:10px 0 0"><button type="button" class="btn ink" id="imp-go" style="width:auto; padding:10px 18px">Import into the form</button></p>
+  <p class="fine" id="imp-note"></p>
+</div>
 <div class="layout">
 <form id="builder" autocomplete="off">
 
@@ -411,7 +431,7 @@ footer a { color: var(--accent); }
     <div class="after" style="margin-top:18px">
       <h4>What happens after you submit</h4>
       <ol>
-        <li>The button opens GitHub with your rubric already filled in. GitHub asks you to sign in (or create an account), and then offers to fork the library and propose your change. Back here, the same button then sends your worked example the same way, so the submission carries both files. There is nothing to edit on GitHub either time; the files arrive exactly as this page wrote them.</li>
+        <li>How it travels depends on the button you used. With one click, both files go together at once and this page confirms it with the link. With the main button, GitHub opens with your rubric already filled in; GitHub asks you to sign in (or create an account), and then offers to fork the library and propose your change, and back here the same button sends your worked example the same way. Either route ends at the same pull request, carrying both files exactly as this page wrote them.</li>
         <li>GitHub shows you your pull request. That page is your submission's home: bookmark it, or copy its link from the button here after you create it.</li>
         <li>GitHub emails you whenever anything happens on it, as long as email notifications are on in your GitHub settings, which they are by default: a comment from the maintainer, a request for changes, or the decision.</li>
         <li>The states, in plain words: open means it is in the review queue. A request for changes means the maintainer has left notes and it is your turn. Merged means your rubric is in the library, and it appears on this site and in the MCP on the next update. Closed without merging means it was not accepted, and the reason is in the comments on that page.</li>
@@ -2310,12 +2330,6 @@ function remixState(entry) {
   s.honestyCustom = entry.honesty || "";
   return s;
 }
-function setMode(mode) {
-  if (mode === "remix") engaged = true;
-  for (const m of ["blank", "remix"]) $("mode-" + m).setAttribute("aria-pressed", m === mode ? "true" : "false");
-  $("remix-panel").hidden = mode !== "remix";
-  refresh();
-}
 function flash(el) {
   const box = el.closest(".crit") || el.closest("fieldset") || el;
   box.classList.add("flash");
@@ -2359,17 +2373,114 @@ function jumpTo(key) {
   }
   focusField($(simple[key]));
 }
+function setRoute(name) {
+  for (const t of document.querySelectorAll(".tab")) t.setAttribute("aria-selected", t.getAttribute("data-route") === name ? "true" : "false");
+  $("tp-files").hidden = name !== "files";
+  $("tp-ai").hidden = name !== "ai";
+  const build = name === "build";
+  document.querySelector(".layout").style.display = build ? "" : "none";
+  $("startfrom-row").style.display = build ? "" : "none";
+  if (!build) $("import-panel").style.display = "none";
+  else if ($("start-from").value === "import") $("import-panel").style.display = "";
+}
+function parseFm(text) {
+  const m = text.match(/^---\n([\s\S]*?)\n---/);
+  if (!m) return null;
+  const fm = {};
+  for (const line of m[1].split("\n")) { const kv = line.match(/^([a-z_]+):\s*(.*)$/); if (kv) fm[kv[1]] = kv[2].trim(); }
+  return { fm, body: text.slice(m[0].length) };
+}
+function splitSections(body) {
+  const out = {}; let cur = null;
+  for (const line of body.split("\n")) {
+    const hd = line.match(/^##\s+(.*)$/);
+    if (hd) { cur = hd[1].trim(); out[cur] = []; }
+    else if (cur) out[cur].push(line);
+  }
+  for (const k of Object.keys(out)) out[k] = out[k].join("\n").trim();
+  return out;
+}
+function parseCriteria(sectionText) {
+  const chunks = sectionText.split(/^###\s+/m);
+  const intro = (chunks[0] || "").trim();
+  const criteria = chunks.slice(1).map((p) => {
+    const lines = p.split("\n");
+    const c = { name: lines[0].replace(/^\d+[.)]\s*/, "").trim(), intro: "", examine: "", good: "", bad: "" };
+    const extra = [];
+    for (const l of lines.slice(1)) {
+      const ex = l.match(/^[-*]?\s*What to examine:\s*(.*)$/i), gd = l.match(/^[-*]?\s*What good looks like:\s*(.*)$/i), bd = l.match(/^[-*]?\s*What bad looks like:\s*(.*)$/i);
+      if (ex) c.examine = ex[1].trim(); else if (gd) c.good = gd[1].trim(); else if (bd) c.bad = bd[1].trim();
+      else if (l.trim()) extra.push(l.trim());
+    }
+    c.intro = extra.join(" ");
+    return c;
+  }).filter((c) => c.name || c.examine);
+  return { intro, criteria };
+}
+function importDraft() {
+  const note = $("imp-note");
+  const parsed = parseFm($("imp-rubric").value);
+  if (!parsed) { note.textContent = "That does not look like a rubric file yet: it needs the frontmatter block at the top, between the two --- lines. Check you pasted the whole file."; return; }
+  const fm = parsed.fm, secs = splitSections(parsed.body);
+  const s = blankState();
+  s.name = fm.name || "";
+  const fname = $("imp-rubric").dataset.filename || "";
+  s.id = fname ? fname.replace(/\.md$/i, "") : kebabify(s.name || "imported-rubric");
+  if (["product-design", "product-management", "marketing", "ux-research"].includes(fm.category)) s.category = fm.category;
+  s.summary = fm.summary || ""; s.whenToUse = fm.when_to_use || ""; s.inputs = fm.inputs || "";
+  s.author = fm.author || ""; s.authorUrl = fm.author_url || "";
+  if (["simple", "standard", "deep"].includes(fm.level)) s.level = fm.level;
+  if (fm.scale) s.scale = fm.scale;
+  if (fm.source_url) { s.sourceOn = true; s.sourceAuthor = fm.source_author || ""; s.sourceTitle = fm.source_title || ""; s.sourceUrl = fm.source_url; s.sourceTakes = secs["Sources"] || ""; }
+  s.purpose = secs["Purpose"] || "";
+  if (secs["Procedure"]) { s.procedureOn = true; s.procedure = secs["Procedure"].split("\n").map((l) => l.replace(/^\d+[.)]\s*/, "").trim()).filter(Boolean).join("\n"); }
+  if (secs["Context requests"]) { const cl = secs["Context requests"].split("\n").map((l) => l.replace(/^[-*]\s*/, "").trim()).filter((l) => l && !l.startsWith("Before judging, ask the user")); if (cl.length) { s.contextOn = true; s.context = cl.join("\n"); } }
+  if (secs["Criteria"]) { const pc = parseCriteria(secs["Criteria"]); s.criteriaIntro = pc.intro; if (pc.criteria.length) s.criteria = pc.criteria; }
+  s.scoring = secs["Scoring"] || "";
+  if (secs["Output format"]) { s.output = secs["Output format"]; s.outputHasSummary = secs["Output format"].includes("Rubric summary"); }
+  if (secs["Honesty rules"]) {
+    for (const k of Object.keys(s.honesty)) s.honesty[k] = false;
+    const custom = [];
+    for (const l of secs["Honesty rules"].split("\n")) {
+      const t = l.replace(/^[-*]\s*/, "").trim(); if (!t) continue;
+      const hit = Object.keys(HONESTY_LINES).find((k) => HONESTY_LINES[k] === t);
+      if (hit) s.honesty[hit] = true; else custom.push(t);
+    }
+    s.honestyCustom = custom.join("\n");
+  }
+  const eText = $("imp-example").value.trim();
+  if (eText) {
+    const lines = eText.split("\n");
+    if (/^#\s+Worked example/.test(lines[0])) lines.shift();
+    while (lines.length && /^(Rubric:|Input:)/.test(lines[0])) lines.shift();
+    s.example = lines.join("\n").trim();
+  }
+  state = s; idEdited = true;
+  fillForm(state); refresh();
+  $("import-panel").style.display = "none";
+  $("saved-note").textContent = "Imported " + (s.name || s.id) + ". The checklist shows anything still missing, and the preview shows the file exactly as it will be submitted.";
+}
+function readFileInto(input, target) {
+  input.addEventListener("change", () => {
+    const f = input.files && input.files[0];
+    if (!f) return;
+    const r = new FileReader();
+    r.onload = () => { target.value = String(r.result || ""); if (target.id === "imp-rubric") target.dataset.filename = f.name; };
+    r.readAsText(f);
+  });
+}
 function init() {
   state = blankState();
-  const sel = $("remix-select");
+  const sf = $("start-from");
   const groups = {};
   for (const r of window.RUBRIC_DATA || []) (groups[r.meta.category] ||= []).push(r);
   for (const [cat, items] of Object.entries(groups)) {
     const g = document.createElement("optgroup");
     g.label = cat === "ux-research" ? "UX Research" : cat.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
     for (const r of items) { const o = document.createElement("option"); o.value = r.id; o.textContent = r.meta.name; g.appendChild(o); }
-    sel.appendChild(g);
+    sf.appendChild(g);
   }
+  for (const t of document.querySelectorAll(".tab")) t.addEventListener("click", () => setRoute(t.getAttribute("data-route")));
   let restored = false;
   try {
     const raw = localStorage.getItem("pr-builder-draft-v1");
@@ -2377,15 +2488,20 @@ function init() {
   } catch (e) {}
   fillForm(state);
   if (restored) { engaged = true; $("saved-note").textContent = "Draft restored from this browser. It saves here as you type."; }
-  $("mode-blank").addEventListener("click", () => {
-    const keep = { author: state.author, authorUrl: state.authorUrl };
-    state = Object.assign(blankState(), keep); idEdited = false; fillForm(state); setMode("blank");
+  sf.addEventListener("change", () => {
+    if (sf.value === "import") { $("import-panel").style.display = ""; return; }
+    $("import-panel").style.display = "none";
+    if (sf.value === "blank") {
+      const keep = { author: state.author, authorUrl: state.authorUrl };
+      state = Object.assign(blankState(), keep); idEdited = false; fillForm(state); refresh();
+      return;
+    }
+    const entry = (window.RUBRIC_DATA || []).find(r => r.id === sf.value);
+    if (entry) { engaged = true; state = remixState(entry); fillForm(state); refresh(); }
   });
-  $("mode-remix").addEventListener("click", () => setMode("remix"));
-  sel.addEventListener("change", () => {
-    const entry = (window.RUBRIC_DATA || []).find(r => r.id === sel.value);
-    if (entry) { state = remixState(entry); fillForm(state); refresh(); }
-  });
+  readFileInto($("imp-rubric-file"), $("imp-rubric"));
+  readFileInto($("imp-example-file"), $("imp-example"));
+  $("imp-go").addEventListener("click", importDraft);
   $("add-criterion").addEventListener("click", () => {
     readForm(); state.criteria.push({ name: "", intro: "", examine: "", good: "", bad: "" }); renderCriteria(); refresh();
   });
@@ -2504,7 +2620,7 @@ function init() {
         renderLastSub();
         try { localStorage.removeItem("pr-builder-draft-v1"); } catch (e) {}
         engaged = false;
-        state = blankState(); idEdited = false; fillForm(state); setMode("blank");
+        state = blankState(); idEdited = false; fillForm(state); refresh();
         $("saved-note").textContent = "Submitted and cleared. The form is blank again.";
       } else {
         ocStatus.textContent = data.error || "The submission did not go through. The button above sends the same two files the other way.";
@@ -2587,7 +2703,7 @@ function init() {
     btn.classList.remove("arming");
     try { localStorage.removeItem("pr-builder-draft-v1"); } catch (e) {}
     engaged = false;
-    state = blankState(); idEdited = false; fillForm(state); setMode("blank");
+    state = blankState(); idEdited = false; fillForm(state); refresh();
     $("saved-note").textContent = "Draft cleared. The form is blank again.";
   });
   refresh();
