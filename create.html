@@ -197,9 +197,9 @@ footer a { color: var(--accent); }
         <label for="f-category">Category</label>
         <select id="f-category">
           <option value="product-design">Product design</option>
-          <option value="product-research">Product research</option>
+          <option value="ux-research">UX research</option>
           <option value="product-management">Product management</option>
-          <option value="product-marketing">Product marketing</option>
+          <option value="marketing">Marketing</option>
           <option value="__custom">A new category of my own…</option>
         </select>
       </div>
@@ -1326,7 +1326,7 @@ window.RUBRIC_DATA = [
     "id": "battlecard-review",
     "meta": {
       "name": "Battlecard Review",
-      "category": "product-marketing",
+      "category": "marketing",
       "version": "1.0",
       "summary": "Reviews a competitive battlecard, judging whether its claims about the competitor are sourced and dated, whether the competitor's strengths are stated honestly, whether the card arms a rep for both winning and losing ground, whether it can be used in the middle of a live call, and whether its freshness is owned.",
       "when_to_use": "Before a battlecard is published to the sales team, and whenever one is refreshed: when the question is whether a rep can trust what it says in front of a buyer who may know the competitor better than the card does.",
@@ -1386,7 +1386,7 @@ window.RUBRIC_DATA = [
     "id": "launch-plan-review",
     "meta": {
       "name": "Launch Plan Review",
-      "category": "product-marketing",
+      "category": "marketing",
       "version": "1.0",
       "summary": "Reviews a product launch plan, judging whether the launch tier is named and resourced to match, every audience has a message and a moment, internal teams are enabled rather than surprised, execution is sequenced and owned, success is instrumented before launch day, and risk, rollback, and a slipping date are all planned for.",
       "when_to_use": "Weeks before a product or feature launch, while the plan can still change: when the question is whether this launch will land as one coordinated event or as a release the market barely notices and the support queue experiences as an ambush.",
@@ -1460,7 +1460,7 @@ window.RUBRIC_DATA = [
     "id": "messaging-review",
     "meta": {
       "name": "Messaging Review",
-      "category": "product-marketing",
+      "category": "marketing",
       "version": "1.0",
       "summary": "Reviews a messaging document, judging whether it leads with an insight rather than the product, engages the alternatives honestly, lets the differentiated value carry the hierarchy, attaches proof at the right strength, keeps the customer as the subject, and answers objections before closing with a clear ask.",
       "when_to_use": "When a messaging guide, message hierarchy, or pitch narrative is about to become the words a homepage, a sales deck, and a sales team all repeat: before it is published or rolled out, when the question is whether the message itself will survive contact with a skeptical buyer.",
@@ -1527,7 +1527,7 @@ window.RUBRIC_DATA = [
     "id": "positioning-review",
     "meta": {
       "name": "Positioning Review",
-      "category": "product-marketing",
+      "category": "marketing",
       "version": "1.0",
       "summary": "Reviews a positioning document against the five components of effective positioning, judging whether the competitive alternatives are the real ones, the unique attributes are actually unique, the value has proof, the best-fit customer is specific, and the market category is chosen rather than defaulted into.",
       "when_to_use": "When positioning is being set or reset: a positioning document or canvas, a category decision, or the input that messaging, sales decks, and a homepage will all be built from, when the question is whether the positioning itself holds together.",
@@ -1597,7 +1597,7 @@ window.RUBRIC_DATA = [
     "id": "competitive-analysis-review",
     "meta": {
       "name": "Competitive Analysis Review",
-      "category": "product-research",
+      "category": "ux-research",
       "version": "1.0",
       "summary": "Reviews a competitive analysis, judging whether the competitor set is complete, the evidence is first-hand and dated, the comparison serves the reader's decision, and competitor strengths are reported as honestly as their weaknesses.",
       "when_to_use": "Before a competitive analysis is circulated or used to plan against: a competitor teardown, a feature comparison, or a market landscape document, when the question is whether the team can plan on what it claims.",
@@ -1664,7 +1664,7 @@ window.RUBRIC_DATA = [
     "id": "findings-review",
     "meta": {
       "name": "Findings Review",
-      "category": "product-research",
+      "category": "ux-research",
       "version": "1.0",
       "summary": "Reviews a research readout, the report or summary stakeholders will read, judging whether every claim traces to evidence, whether observation and interpretation are kept apart, and whether recommendations stay proportional to what the study can support.",
       "when_to_use": "Before a research readout is circulated: the findings deck, the summary document, or the report a team will use to decide something, when the question is whether a reader can trust what it claims.",
@@ -1731,7 +1731,7 @@ window.RUBRIC_DATA = [
     "id": "study-plan-review",
     "meta": {
       "name": "Study Plan Review",
-      "category": "product-research",
+      "category": "ux-research",
       "version": "1.0",
       "summary": "Reviews a research study plan before it is fielded, judging whether the questions are answerable, the method fits them, and the participants and materials will produce evidence the team can act on.",
       "when_to_use": "Before recruiting begins for an interview study, a usability study, a diary study, or any planned piece of product research, when the cost of fixing the plan is still low and the cost of fielding a flawed one is not yet paid.",
@@ -1798,7 +1798,7 @@ window.RUBRIC_DATA = [
     "id": "survey-review",
     "meta": {
       "name": "Survey Review",
-      "category": "product-research",
+      "category": "ux-research",
       "version": "1.0",
       "summary": "Reviews a survey questionnaire question by question, finding the wording, scale, and ordering flaws that bias answers or make them impossible to give, and suggesting a corrected version of each flawed question.",
       "when_to_use": "Before a survey is sent, while the questionnaire can still be changed: for satisfaction surveys, screening surveys, product feedback surveys, and any questionnaire whose results will be quoted as evidence.",
@@ -2152,7 +2152,7 @@ function renderCriteria() {
 }
 function fillForm(s) {
   $("f-name").value = s.name; $("f-id").value = s.id;
-  $("f-category").value = ["product-design","product-research","product-management","product-marketing"].includes(s.category) ? s.category : "__custom";
+  $("f-category").value = ["product-design","ux-research","product-management","marketing"].includes(s.category) ? s.category : "__custom";
   $("f-category-custom").value = s.categoryCustom || ( $("f-category").value === "__custom" ? s.category : "" );
   $("custom-cat-wrap").hidden = $("f-category").value !== "__custom";
   $("f-summary").value = s.summary; $("f-when").value = s.whenToUse; $("f-inputs").value = s.inputs;
@@ -2334,7 +2334,7 @@ function init() {
   for (const r of window.RUBRIC_DATA || []) (groups[r.meta.category] ||= []).push(r);
   for (const [cat, items] of Object.entries(groups)) {
     const g = document.createElement("optgroup");
-    g.label = cat.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+    g.label = cat === "ux-research" ? "UX Research" : cat.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
     for (const r of items) { const o = document.createElement("option"); o.value = r.id; o.textContent = r.meta.name; g.appendChild(o); }
     sel.appendChild(g);
   }
