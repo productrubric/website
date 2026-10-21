@@ -363,14 +363,14 @@ footer a { color: var(--accent); }
     <h2>Submit it to the library</h2>
     <p class="hint">The second way: share it. Your rubric goes into the review queue as a pull request on GitHub, credited to you.</p>
     <div class="actions">
-      <a class="btn ink" id="submit-link" href="#" target="_blank" rel="noopener">Submit for review on GitHub</a>
-      <a class="btn" id="submit-example-link" href="#" target="_blank" rel="noopener" hidden>Submit the worked example too</a>
+      <button type="button" class="btn ink" id="submit-btn">Submit for review on GitHub</button>
       <p class="fine" id="submit-note"></p>
+      <p id="submit-restart-wrap" hidden><button type="button" class="text-btn" id="submit-restart">Start the submission over</button></p>
     </div>
     <div class="after" style="margin-top:18px">
       <h4>What happens after you submit</h4>
       <ol>
-        <li>The button opens GitHub with your file already filled in. GitHub asks you to sign in (or create an account), and then offers to fork the library and propose your change. That is the whole GitHub part; there is nothing to edit.</li>
+        <li>The button opens GitHub with your rubric already filled in. GitHub asks you to sign in (or create an account), and then offers to fork the library and propose your change. Back here, the same button then sends your worked example the same way, so the submission carries both files. There is nothing to edit on GitHub either time; the files arrive exactly as this page wrote them.</li>
         <li>GitHub shows you your pull request. That page is your submission's home: bookmark it, or copy its link from the button here after you create it.</li>
         <li>GitHub emails you whenever anything happens on it, as long as email notifications are on in your GitHub settings, which they are by default: a comment from the maintainer, a request for changes, or the decision.</li>
         <li>The states, in plain words: open means it is in the review queue. A request for changes means the maintainer has left notes and it is your turn. Merged means your rubric is in the library, and it appears on this site and in the MCP on the next update. Closed without merging means it was not accepted, and the reason is in the comments on that page.</li>
@@ -1790,6 +1790,7 @@ const SUMMARY_SPEC = "End the report with the summary block, in this exact shape
 
 let idEdited = false;
 let state = null;
+let lastRubricUrl = "", lastExampleUrl = "";
 
 function kebabify(s) {
   return s.toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "")
@@ -1802,6 +1803,7 @@ function blankState() {
     sourceOn: false, sourceAuthor: "", sourceTitle: "", sourceUrl: "", sourceTakes: "",
     purpose: "", contextOn: false, context: "", procedureOn: false, procedure: "",
     criteriaIntro: "", criteria: [{ name: "", intro: "", examine: "", good: "", bad: "" }],
+    submitStep: 0, submittedForId: "",
 
     scaleMode: "grades", scale: SCALE_DEFAULTS.grades, scoring: SCORING_TEMPLATES.grades,
     output: OUTPUT_TEMPLATE, outputHasSummary: false, honesty: { invent: true, predict: true, beyond: false, evidence: false },
@@ -2098,20 +2100,30 @@ function refresh() {
   $("file-dialog-title").textContent = `${s.id || "your-rubric"}.md`;
   const cat = categoryOf(s) || "<category>";
   const filePath = `rubrics/${cat}/${s.id || "<file-name>"}.md`;
-  const submitUrl = "https://github.com/productrubric/product-rubric/new/main?filename=" +
+  lastRubricUrl = "https://github.com/productrubric/product-rubric/new/main?filename=" +
     encodeURIComponent(filePath) + "&value=" + encodeURIComponent(text);
-  $("submit-link").href = submitUrl;
-  $("submit-note").textContent = failing
-    ? `The checklist has ${failing} required item${failing === 1 ? "" : "s"} open. You can still submit, and the same check will run on the pull request, but it is kinder to your reviewer to close them here first.`
-    : "Your file passes every required check. The same check runs again on the pull request itself.";
-  if (submitUrl.length > 7000) $("submit-note").textContent += " This file is long, and GitHub's prefilled editor can struggle with very long links; if the editor opens empty, download the file instead and use the upload option in the same place.";
-  const ex = $("submit-example-link");
-  if (s.example) {
-    const exampleText = exampleFile(s);
-    ex.hidden = false;
-    ex.href = "https://github.com/productrubric/product-rubric/new/main?filename=" +
-      encodeURIComponent(`examples/${cat}/${s.id || "<file-name>"}.md`) + "&value=" + encodeURIComponent(exampleText);
-  } else ex.hidden = true;
+  lastExampleUrl = "https://github.com/productrubric/product-rubric/new/main?filename=" +
+    encodeURIComponent(`examples/${cat}/${s.id || "<file-name>"}.md`) + "&value=" + encodeURIComponent(exampleFile(s));
+  if (s.submittedForId && s.submittedForId !== s.id) { s.submitStep = 0; s.submittedForId = ""; }
+  const step = s.submitStep || 0;
+  const btn = $("submit-btn"), note = $("submit-note");
+  $("submit-restart-wrap").hidden = step === 0;
+  if (step === 1) {
+    btn.textContent = "Now add the worked example";
+    note.textContent = "Your rubric opened on GitHub in a new tab. Press Propose changes there, then Create pull request. Then press this button, and the worked example opens the same way, as the second file of the same submission.";
+  } else if (step === 2) {
+    btn.textContent = "Both files sent: track it on GitHub";
+    note.textContent = "Both files are on their way. Bookmark the pull request page GitHub showed you. If the example ever opened as its own pull request instead of joining the first, leave a comment on either one and they will be combined in review.";
+  } else if (!s.example) {
+    btn.textContent = "Submit for review on GitHub";
+    note.textContent = "A library submission is two files: the rubric, and one worked example showing it run. Paste a worked example in the section above and this one button sends both, one after the other.";
+  } else {
+    btn.textContent = "Submit for review on GitHub";
+    note.textContent = failing
+      ? `The checklist has ${failing} required item${failing === 1 ? "" : "s"} open. You can still submit, and the same check will run on the pull request, but it is kinder to your reviewer to close them here first.`
+      : "Your file passes every required check, and your worked example is in. This button opens the rubric on GitHub first, then sends the example.";
+    if (lastRubricUrl.length > 7000) note.textContent += " This file is long, and GitHub's prefilled editor can struggle with very long links; if the editor opens empty, download the file instead and use the upload option in the same place.";
+  }
   $("dl-example").disabled = !s.example;
   clearTimeout(saveTimer);
   saveTimer = setTimeout(() => {
@@ -2211,6 +2223,27 @@ function init() {
   });
   $("dl-rubric-2").addEventListener("click", () => {
     readForm(); download(new Blob([buildRubric(state)], { type: "text/markdown" }), `${state.id || "rubric"}.md`);
+  });
+  $("submit-btn").addEventListener("click", () => {
+    readForm();
+    if ((state.submitStep || 0) === 2) { window.open("https://github.com/pulls", "_blank"); return; }
+    if (!state.example) {
+      try { $("f-example").scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) {}
+      $("f-example").focus();
+      $("submit-note").textContent = "The worked example comes first: run your rubric once in your own AI, paste the output into the Worked example box, and then this button will send both files.";
+      return;
+    }
+    if ((state.submitStep || 0) === 0) {
+      window.open(lastRubricUrl, "_blank");
+      state.submitStep = 1; state.submittedForId = state.id;
+    } else {
+      window.open(lastExampleUrl, "_blank");
+      state.submitStep = 2;
+    }
+    refresh();
+  });
+  $("submit-restart").addEventListener("click", () => {
+    state.submitStep = 0; state.submittedForId = ""; refresh();
   });
   $("rail-toggle").addEventListener("click", () => {
     const side = document.querySelector(".side");
