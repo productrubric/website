@@ -148,6 +148,7 @@ dialog#file-dialog .dlg-foot .btn { width: auto; padding: 9px 16px; font-size: 1
 .tab:hover { color: var(--ink); }
 .tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
 .tab-panel { padding-top: 8px; max-width: 760px; }
+code.path { white-space: nowrap; }
 .tab-panel a, #last-sub a, #oc-done a { color: var(--accent); }
 .panel-h { font-family: var(--serif); font-size: 24px; font-weight: 600; margin: 18px 0 10px; }
 .panel-p { font-size: 16px; }
@@ -182,7 +183,7 @@ footer a { color: var(--accent); }
 </div>
 <div class="tab-panel" id="tp-files" hidden>
   <h2 class="panel-h">Write the two files yourself</h2>
-  <p class="panel-p">Every rubric in the library is two Markdown files: the rubric, at <code>rubrics/&lt;category&gt;/&lt;rubric-id&gt;.md</code>, and one worked example showing it run, at <code>examples/&lt;category&gt;/&lt;rubric-id&gt;.md</code>. Both follow a published format: a short block of frontmatter, then Purpose, Criteria, Scoring, Output format, and Honesty rules, in that order.</p>
+  <p class="panel-p">Every rubric in the library is two Markdown files: the rubric, at <code class="path">rubrics/&lt;category&gt;/&lt;rubric-id&gt;.md</code>, and one worked example showing it run, at <code class="path">examples/&lt;category&gt;/&lt;rubric-id&gt;.md</code>. Both follow a published format: a short block of frontmatter, then Purpose, Criteria, Scoring, Output format, and Honesty rules, in that order.</p>
   <div class="after">
     <ol>
       <li>Read <a href="https://github.com/productrubric/product-rubric/blob/main/FORMAT.md" target="_blank" rel="noopener">the format</a> and <a href="https://github.com/productrubric/product-rubric/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">the contributing guide</a>. The worked example is required, not decoration: it is how reviewers see the rubric actually judge something.</li>
