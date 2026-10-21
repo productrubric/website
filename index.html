@@ -56,7 +56,29 @@ header nav a:hover { border-color: var(--line); }
 header nav a.btn { background: var(--ink); color: var(--paper); border-color: var(--ink); font-weight: 700; margin-left: 14px; }
 header nav a.btn:hover { background: #33302d; }
 
-.hero { padding: 64px 0 10px; }
+.hero { padding: 64px 0 10px; display: grid; grid-template-columns: minmax(0, 700px) minmax(0, 1fr); gap: 54px; align-items: start; }
+@media (max-width: 1020px) { .hero { grid-template-columns: 1fr; gap: 34px; } .hero-visual { max-width: 520px; } }
+.hero-visual .cap { font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
+.rstack { display: grid; margin-top: 12px; }
+.rcard { grid-area: 1 / 1; display: block; text-decoration: none; color: var(--ink); background: #fff; border: 2px solid var(--ink); border-top: 6px solid var(--accent); border-radius: 6px; padding: 22px 24px 18px; opacity: 0; visibility: hidden; transition: opacity 0.7s ease, visibility 0.7s ease; box-shadow: 8px 8px 0 rgba(25, 24, 23, 0.06); }
+.rcard.on { opacity: 1; visibility: visible; }
+.rcard:hover { box-shadow: 8px 8px 0 rgba(158, 42, 43, 0.14); }
+.rcard .rtop { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.12em; }
+.rcard .rcat { color: var(--accent); }
+.rcard .rcount { color: var(--muted); }
+.rcard h3 { font-family: var(--serif); font-weight: 600; font-size: 27px; line-height: 1.15; margin: 10px 0 8px; }
+.rcard .rsum { font-size: 15px; line-height: 1.55; color: #2b2b2e; margin: 0 0 6px; }
+.rcard ul { list-style: none; margin: 10px 0 4px; padding: 12px 0 6px; border-top: 1px solid var(--line); }
+.rcard li { display: flex; gap: 9px; align-items: baseline; font-size: 14.5px; padding: 3px 0; }
+.rcard li .sq { flex: none; width: 9px; height: 9px; border: 1.5px solid var(--accent); border-radius: 2px; position: relative; top: 1px; }
+.rcard .rfoot { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 8px; }
+.rcard .rscale { font-family: var(--mono); font-size: 12px; letter-spacing: 0.05em; color: var(--accent); }
+.rcard .rcredit { font-size: 13.5px; color: var(--muted); margin-top: 3px; }
+.rcard .rgo { font-size: 13.5px; font-weight: 700; margin-top: 8px; }
+.rdots { display: flex; gap: 8px; margin-top: 16px; }
+.rdots button { width: 26px; height: 4px; border: 0; border-radius: 2px; background: var(--line); padding: 0; cursor: pointer; }
+.rdots button.on { background: var(--accent); }
+@media (prefers-reduced-motion: reduce) { .rcard { transition: none; } }
 .hero h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(38px, 6vw, 58px); line-height: 1.08; letter-spacing: -0.015em; margin: 0 0 22px; max-width: 720px; }
 .hero p { font-size: 18.5px; color: #2b2b2e; max-width: 660px; margin: 0 0 14px; }
 @media (max-width: 480px) { .hero { padding-top: 44px; } .hero p { font-size: 17px; } }
@@ -238,9 +260,92 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
   <main id="main" tabindex="-1">
 
   <div class="hero">
+    <div class="hero-text">
     <h1>Judge the work against the <span class="hl">same standard</span>.</h1>
     <p>ProductRubric helps product teams make better decisions about the work in front of them. Whether a design is ready to ship, whether a survey can be trusted, whether findings are strong enough to act on: those calls usually rest on whoever happens to review the work, using whatever criteria they improvise in the moment.</p>
     <p>ProductRubric is an open library of evaluation rubrics that replaces the improvisation. Your AI assistant applies a rubric to the work itself, a screen, a design board, a study plan, a questionnaire, or a readout, and returns a structured review, the same shape of review in Claude, ChatGPT, Grok, Cursor, or any other tool, every time.</p>
+    </div>
+    <div class="hero-visual">
+      <div class="cap">From the library</div>
+      <div class="rstack" id="rstack">
+        <a class="rcard on" href="#rubric-positioning-review">
+          <div class="rtop"><span class="rcat">Product marketing</span><span class="rcount">1 / 5</span></div>
+          <h3>Positioning Review</h3>
+          <p class="rsum">Reviews a positioning document against the five components of effective positioning.</p>
+          <ul>
+            <li><span class="sq"></span>Competitive alternatives are the real ones</li>
+            <li><span class="sq"></span>Unique attributes are actually unique</li>
+            <li><span class="sq"></span>Value follows from the attributes, and proof exists</li>
+          </ul>
+          <div class="rfoot">
+            <div class="rscale">HOLDS · NEEDS WORK · MISSING</div>
+            <div class="rcredit">Based on <em>Obviously Awesome</em> by April Dunford</div>
+            <div class="rgo">See it in the library ↓</div>
+          </div>
+        </a>
+        <a class="rcard" href="#rubric-design-quality">
+          <div class="rtop"><span class="rcat">Product design</span><span class="rcount">2 / 5</span></div>
+          <h3>Design Quality</h3>
+          <p class="rsum">Reviews a design submission against seven dimensions of professional design quality, the way a design leader would in a critique.</p>
+          <ul>
+            <li><span class="sq"></span>Right problem</li>
+            <li><span class="sq"></span>Grounded in evidence</li>
+            <li><span class="sq"></span>Holds together as a system</li>
+          </ul>
+          <div class="rfoot">
+            <div class="rscale">SCORED 0–100</div>
+            <div class="rcredit">By David Nguyen</div>
+            <div class="rgo">See it in the library ↓</div>
+          </div>
+        </a>
+        <a class="rcard" href="#rubric-user-story-review">
+          <div class="rtop"><span class="rcat">Product management</span><span class="rcount">3 / 5</span></div>
+          <h3>User Story Review</h3>
+          <p class="rsum">Reviews a user story and its acceptance criteria, judging whether the story is valuable to a named user, small and independent enough to build, and estimable from what is written.</p>
+          <ul>
+            <li><span class="sq"></span>Valuable to a named user</li>
+            <li><span class="sq"></span>Independent</li>
+            <li><span class="sq"></span>Negotiable</li>
+          </ul>
+          <div class="rfoot">
+            <div class="rscale">HOLDS · NEEDS WORK · MISSING</div>
+            <div class="rcredit">Based on <em>INVEST in Good Stories</em> by Bill Wake</div>
+            <div class="rgo">See it in the library ↓</div>
+          </div>
+        </a>
+        <a class="rcard" href="#rubric-inclusive-design-audit">
+          <div class="rtop"><span class="rcat">Product design</span><span class="rcount">4 / 5</span></div>
+          <h3>Inclusive Design Audit</h3>
+          <p class="rsum">Audits a screen or flow against five inclusive design principles for cultural fit, checking who the design includes and who it unintentionally leaves out.</p>
+          <ul>
+            <li><span class="sq"></span>Representation &amp; Bias</li>
+            <li><span class="sq"></span>Cultural Sensitivity</li>
+            <li><span class="sq"></span>Fair Access</li>
+          </ul>
+          <div class="rfoot">
+            <div class="rscale">SCORED 0–10</div>
+            <div class="rcredit">By David Nguyen, from <em>The Missing Layer in Inclusive Design</em></div>
+            <div class="rgo">See it in the library ↓</div>
+          </div>
+        </a>
+        <a class="rcard" href="#rubric-accessibility-review">
+          <div class="rtop"><span class="rcat">Product design</span><span class="rcount">5 / 5</span></div>
+          <h3>Accessibility Review</h3>
+          <p class="rsum">Reviews a screen's design for accessibility problems that are visible in a screenshot or description, judged against criteria derived from WCAG 2.2.</p>
+          <ul>
+            <li><span class="sq"></span>Perceivable: text readability</li>
+            <li><span class="sq"></span>Perceivable: meaning never rides on color alone</li>
+            <li><span class="sq"></span>Operable: targets and spacing</li>
+          </ul>
+          <div class="rfoot">
+            <div class="rscale">BLOCKER · SERIOUS · MODERATE · MINOR</div>
+            <div class="rcredit">Criteria derived from WCAG 2.2, by the W3C</div>
+            <div class="rgo">See it in the library ↓</div>
+          </div>
+        </a>
+      </div>
+      <div class="rdots" id="rdots" aria-label="Choose a featured rubric"></div>
+    </div>
   </div>
 
   <div class="connect" id="connect" role="region" aria-labelledby="connect-h">
@@ -365,7 +470,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>How it reports:</strong> 1-5 per principle; overall 0-100</p>
       </div>
     </details>
-    <details class="rubric">
+    <details class="rubric" id="rubric-inclusive-design-audit">
       <summary>
         <span class="title">Inclusive Design Audit</span>
         <span class="level" data-tip="Standard: one screen or flow, judged against structured criteria, with a fuller report.">Standard</span>
@@ -379,7 +484,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>How it reports:</strong> 0-2 per principle; overall 0-10</p>
       </div>
     </details>
-    <details class="rubric">
+    <details class="rubric" id="rubric-accessibility-review">
       <summary>
         <span class="title">Accessibility Review</span>
         <span class="level" data-tip="Standard: one screen or flow, judged against structured criteria, with a fuller report.">Standard</span>
@@ -435,7 +540,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>How it reports:</strong> Exactly 3 hotspots; intensity High 70-100, Medium 40-69, Low 20-39</p>
       </div>
     </details>
-    <details class="rubric">
+    <details class="rubric" id="rubric-design-quality">
       <summary>
         <span class="title">Design Quality</span>
         <span class="level" data-tip="Deep: needs more than the artifact itself, such as a full board with its rationale, or context the rubric asks you for before it judges.">Deep</span>
@@ -559,7 +664,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>How it reports:</strong> No numeric score; each criterion judged Holds, Needs work, or Missing, with an overall verdict on whether the statement is ready to work from</p>
       </div>
     </details>
-    <details class="rubric">
+    <details class="rubric" id="rubric-user-story-review">
       <summary>
         <span class="title">User Story Review</span>
         <span class="level" data-tip="Simple: one screen and one narrow question. Quick to run, on any current model.">Simple</span>
@@ -593,7 +698,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
     <div class="kicker">The library, product marketing</div>
     <h2>Product marketing</h2>
     <p class="sub">Run one before positioning, messaging, a launch, or a battlecard reaches the people who will repeat it. Select a rubric for its full description.</p>
-    <details class="rubric">
+    <details class="rubric" id="rubric-positioning-review">
       <summary>
         <span class="title">Positioning Review</span>
         <span class="level" data-tip="Standard: one screen or flow, judged against structured criteria, with a fuller report.">Standard</span>
@@ -826,6 +931,49 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
   if (prev) prev.addEventListener("click", function () { go(i - 1); });
   if (next) next.addEventListener("click", function () { go(i + 1); });
   go(0);
+})();
+</script>
+<script>
+(function () {
+  var cards = Array.prototype.slice.call(document.querySelectorAll(".rcard"));
+  var dotsBox = document.getElementById("rdots");
+  if (!cards.length || !dotsBox) return;
+  var cur = 0, timer = null;
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var dots = cards.map(function (card, i) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.setAttribute("aria-label", "Show " + card.querySelector("h3").textContent);
+    b.addEventListener("click", function () { show(i); restart(); });
+    dotsBox.appendChild(b);
+    return b;
+  });
+  function show(n) {
+    cur = n;
+    cards.forEach(function (c, i) { c.classList.toggle("on", i === n); });
+    dots.forEach(function (d, i) { d.classList.toggle("on", i === n); });
+  }
+  function next() { show((cur + 1) % cards.length); }
+  function start() { if (!reduced && !timer) timer = setInterval(next, 5200); }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+  function restart() { stop(); start(); }
+  var visual = document.querySelector(".hero-visual");
+  visual.addEventListener("mouseenter", stop);
+  visual.addEventListener("mouseleave", start);
+  visual.addEventListener("focusin", stop);
+  visual.addEventListener("focusout", start);
+  document.addEventListener("visibilitychange", function () { document.hidden ? stop() : start(); });
+  show(0);
+  start();
+  function openFromHash() {
+    if (!location.hash) return;
+    try {
+      var el = document.querySelector(location.hash);
+      if (el && el.tagName === "DETAILS") el.open = true;
+    } catch (e) {}
+  }
+  window.addEventListener("hashchange", openFromHash);
+  openFromHash();
 })();
 </script>
 </body>
