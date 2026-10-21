@@ -1,0 +1,56 @@
+# ProductRubric
+
+> An open library of evaluation rubrics for product teams. An AI assistant applies a rubric to the work itself, a screen, a design board, a study plan, a questionnaire, a readout, a PRD, or a launch plan, and returns a structured review, the same shape of review in every tool, every time.
+
+ProductRubric contains no AI. It is a library of written standards: each rubric names the criteria for one kind of review, says what to examine under each one and what good and bad look like, and fixes the shape of the report, which always ends with a short Rubric summary block. Your own AI assistant does the reviewing, and the material you evaluate never passes through ProductRubric.
+
+The library has four categories and 21 rubrics. Many rubrics are built on published frameworks, and those stay credited to their authors: Jakob Nielsen's usability heuristics, April Dunford's positioning, Bill Wake's INVEST model for user stories, the W3C's WCAG for accessibility, and others named in each file. Rubrics written for this library are credited to their authors in the file.
+
+## How to use the library
+
+- Read any rubric in full at the link listed for it below and give it to your AI assistant with the work to review.
+- Every rubric also ships as an installable Skill: https://github.com/productrubric/product-rubric/tree/main/skill
+- The library is served over MCP at https://mcp.productrubric.com/mcp (tools: list_rubrics, get_rubric, about). Any MCP client can connect without an account or a key.
+- Build your own rubric in the shared format with the browser builder: https://productrubric.com/create
+- Browse the library on the website: https://productrubric.com/
+
+ProductRubric is an open project, created and maintained by David Nguyen. Code is Apache 2.0 and rubric content is CC BY 4.0. Source repository: https://github.com/productrubric/product-rubric
+
+## Product Design
+
+- [Accessibility Review](https://github.com/productrubric/product-rubric/blob/main/rubrics/product-design/accessibility-review.md) (standard): Reviews a screen's design for accessibility problems that are visible in a screenshot or description, judged against criteria derived from WCAG 2.2.
+- [Attention Prediction](https://github.com/productrubric/product-rubric/blob/main/rubrics/product-design/attention-prediction.md) (simple): Predicts the three places a viewer's eye will land first on a screen, in order, with positions a tool can draw as an overlay.
+- [Copy Review](https://github.com/productrubric/product-rubric/blob/main/rubrics/product-design/copy-review.md) (standard): Reviews every piece of text on a screen and returns a revision for each one that fits the same space and does the same job better.
+- [Design Principles Score](https://github.com/productrubric/product-rubric/blob/main/rubrics/product-design/design-principles-score.md) (standard): Scores a screen or flow against seven product design principles, with findings tied to visible elements.
+- [Design Quality](https://github.com/productrubric/product-rubric/blob/main/rubrics/product-design/design-quality.md) (deep): Reviews a design submission, a multi-frame board with its rationale, against seven dimensions of professional design quality, the way a design leader would in a critique.
+- [Five Second Test](https://github.com/productrubric/product-rubric/blob/main/rubrics/product-design/five-second-test.md) (simple): Predicts what a first-time visitor will remember after seeing a screen for five seconds, and which notable elements they will miss.
+- [Inclusive Design Audit](https://github.com/productrubric/product-rubric/blob/main/rubrics/product-design/inclusive-design-audit.md) (standard): Audits a screen or flow against five inclusive design principles for cultural fit, checking who the design includes and who it unintentionally leaves out.
+- [Usability Heuristics Review](https://github.com/productrubric/product-rubric/blob/main/rubrics/product-design/usability-heuristics-review.md) (standard): Evaluates a screen or flow against the ten usability heuristics published by Jakob Nielsen, reporting problems with severity ratings.
+
+## UX Research
+
+- [Competitive Analysis Review](https://github.com/productrubric/product-rubric/blob/main/rubrics/ux-research/competitive-analysis-review.md) (standard): Reviews a competitive analysis, judging whether the competitor set is complete, the evidence is first-hand and dated, the comparison serves the reader's decision, and competitor strengths are reported as honestly as their weaknesses.
+- [Findings Review](https://github.com/productrubric/product-rubric/blob/main/rubrics/ux-research/findings-review.md) (standard): Reviews a research readout, the report or summary stakeholders will read, judging whether every claim traces to evidence, whether observation and interpretation are kept apart, and whether recommendations stay proportional to what the study can support.
+- [Study Plan Review](https://github.com/productrubric/product-rubric/blob/main/rubrics/ux-research/study-plan-review.md) (deep): Reviews a research study plan before it is fielded, judging whether the questions are answerable, the method fits them, and the participants and materials will produce evidence the team can act on.
+- [Survey Review](https://github.com/productrubric/product-rubric/blob/main/rubrics/ux-research/survey-review.md) (standard): Reviews a survey questionnaire question by question, finding the wording, scale, and ordering flaws that bias answers or make them impossible to give, and suggesting a corrected version of each flawed question.
+
+## Product Management
+
+- [PRD Review](https://github.com/productrubric/product-rubric/blob/main/rubrics/product-management/prd-review.md) (deep): Reviews a product requirements document before a team builds against it, judging whether the problem is established with evidence, the scope is decidable, success is measurable, and the undecided things are labeled as undecided.
+- [Problem Statement Review](https://github.com/productrubric/product-rubric/blob/main/rubrics/product-management/problem-statement-review.md) (simple): Reviews a problem statement or problem brief, judging whether it names a specific person, rests on evidence, states the cost of the status quo, stays free of a smuggled-in solution, and draws its own boundary.
+- [Project Plan Review](https://github.com/productrubric/product-rubric/blob/main/rubrics/product-management/project-plan-review.md) (deep): Reviews a project plan, judging whether its outcome and scope are decidable, its milestones are verifiable states, its estimates take the outside view instead of the optimistic inside one, its critical path is visible, its risks, assumptions, issues, and dependencies are kept as a living register, ownership is singular, and the plan knows how it will change.
+- [Roadmap Review](https://github.com/productrubric/product-rubric/blob/main/rubrics/product-management/roadmap-review.md) (standard): Reviews a product roadmap, judging whether it is organized by outcomes rather than outputs, whether each item traces to a strategy, whether its dates are honest about their certainty, and whether what is not on it is as clear as what is.
+- [User Story Review](https://github.com/productrubric/product-rubric/blob/main/rubrics/product-management/user-story-review.md) (simple): Reviews a user story and its acceptance criteria, judging whether the story is valuable to a named user, small and independent enough to build, estimable from what is written, and confirmed by criteria a tester could actually check.
+
+## Marketing
+
+- [Battlecard Review](https://github.com/productrubric/product-rubric/blob/main/rubrics/marketing/battlecard-review.md) (simple): Reviews a competitive battlecard, judging whether its claims about the competitor are sourced and dated, whether the competitor's strengths are stated honestly, whether the card arms a rep for both winning and losing ground, whether it can be used in the middle of a live call, and whether its freshness is owned.
+- [Launch Plan Review](https://github.com/productrubric/product-rubric/blob/main/rubrics/marketing/launch-plan-review.md) (deep): Reviews a product launch plan, judging whether the launch tier is named and resourced to match, every audience has a message and a moment, internal teams are enabled rather than surprised, execution is sequenced and owned, success is instrumented before launch day, and risk, rollback, and a slipping date are all planned for.
+- [Messaging Review](https://github.com/productrubric/product-rubric/blob/main/rubrics/marketing/messaging-review.md) (standard): Reviews a messaging document, judging whether it leads with an insight rather than the product, engages the alternatives honestly, lets the differentiated value carry the hierarchy, attaches proof at the right strength, keeps the customer as the subject, and answers objections before closing with a clear ask.
+- [Positioning Review](https://github.com/productrubric/product-rubric/blob/main/rubrics/marketing/positioning-review.md) (standard): Reviews a positioning document against the five components of effective positioning, judging whether the competitive alternatives are the real ones, the unique attributes are actually unique, the value has proof, the best-fit customer is specific, and the market category is chosen rather than defaulted into.
+
+## More
+
+- [The full index of rubrics](https://github.com/productrubric/product-rubric/blob/main/PRODUCTRUBRIC.md): every rubric with its verdict scale and level, in one table.
+- [The rubric format](https://github.com/productrubric/product-rubric/blob/main/FORMAT.md): the shared file format every rubric follows, so any rubric can be read, run, and remixed the same way.
+- [Worked examples](https://github.com/productrubric/product-rubric/tree/main/examples): rubrics already run against sample material, so you can see the shape of a finished review before running one.
