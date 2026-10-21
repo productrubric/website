@@ -14,6 +14,14 @@ The library has four categories and 21 rubrics. Many rubrics are built on publis
 - Build your own rubric in the shared format with the browser builder: https://productrubric.com/create
 - Browse the library on the website: https://productrubric.com/
 
+## Contributing a rubric
+
+Additions to the library are welcome. A submission is two files: the rubric itself and a worked example showing it run against sample material. Rubrics are checked against the format rules in FORMAT.md before they are accepted.
+
+- Ask your AI assistant to draft one. The MCP server offers an author_a_rubric prompt that walks the assistant through the format, the self-checks, and the worked example. When the draft is ready, an MCP client can submit it straight from the conversation with the submit_rubric tool; you sign in with GitHub once inside the chat and the submission arrives under your own account. Nothing the assistant drafts is sent anywhere until you approve that sign-in.
+- Build it in the browser at https://productrubric.com/create. The builder holds the same format rules as a live checklist, and its Start from menu can import a draft your AI wrote and open it in the form to finish. From there you can sign in with GitHub and send it in one click, or download the files and carry them to GitHub yourself.
+- Write the files by hand and open a pull request in the repository: https://github.com/productrubric/product-rubric
+
 ProductRubric is an open project, created and maintained by David Nguyen. Code is Apache 2.0 and rubric content is CC BY 4.0. Source repository: https://github.com/productrubric/product-rubric
 
 ## Product Design
