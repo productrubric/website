@@ -30,13 +30,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,600;6..72,700&family=Hanken+Grotesk:wght@400;600;700&family=Martian+Mono:wdth,wght@87.5,400;87.5,500&display=swap" rel="stylesheet">
 <style>
-:root { --serif: "Newsreader", Georgia, "Times New Roman", serif; --sans: "Hanken Grotesk", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; --mono: "Martian Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --ink: #191817; --paper: #fffdf7; --muted: #6b6660; --line: #e4ded2;
-  --accent: #9e2a2b; --card: #fffdf7; --tint: #faf6ec; --hover: #f4efe2; --ok: #2e6b30; }
+:root { --serif: "Newsreader", Georgia, "Times New Roman", serif; --sans: "Hanken Grotesk", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; --mono: "Martian Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; --ink: #191817; --paper: #fffdf7; --muted: #6b6660; --line: #e4ded2; --accent: #9e2a2b; --card: #fffdf7; --tint: #faf6ec; --hover: #f4efe2; --ok: #2e6b30; }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.65; -webkit-font-smoothing: antialiased; }
 .wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
-@media (max-width: 480px) { .wrap { padding: 0 18px; } }
+@media (max-width: 480px) {
+  .wrap { padding: 0 18px; }
+}
 header { padding: 26px 0 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--ink); }
 header img { width: 36px; height: 36px; display: block; }
 header .name { font-family: var(--serif); font-size: 23px; font-weight: 700; letter-spacing: -0.01em; }
@@ -46,27 +46,32 @@ header nav a:hover { border-color: var(--line); }
 header nav a.btn { background: var(--ink); color: var(--paper); border-width: 1px; border-style: solid; border-color: var(--ink); font-weight: 700; font-size: 14.5px; margin-left: 14px; padding: 8px 14px; }
 header nav a.btn:hover { background: #33302d; }
 .intro { padding: 64px 0 10px; max-width: 760px; }
-@media (max-width: 480px) { .intro { padding-top: 44px; } }
+@media (max-width: 480px) {
+  .intro { padding-top: 44px; }
+}
 .kicker { font-family: var(--mono); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent); margin-bottom: 8px; }
 .intro h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(32px, 5vw, 46px); line-height: 1.08; letter-spacing: -0.015em; margin: 0 0 22px; }
 .intro p { font-size: 17.5px; color: #2b2b2e; margin: 0 0 12px; }
 .layout { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 34px; align-items: start; margin-top: 26px; }
-@media (max-width: 980px) { .layout { grid-template-columns: 1fr; } }
-fieldset.card { border: 2px solid var(--ink); border-top: 2px solid var(--accent); border-radius: 4px; background: var(--card); padding: 22px 24px 8px; margin: 0 0 26px; }
-fieldset.card legend { font-family: var(--serif); font-size: 21px; font-weight: 600; padding: 2px 10px; margin-left: 4px; background: var(--card); }
-div.card { border: 2px solid var(--ink); border-top: 2px solid var(--accent); border-radius: 4px; background: var(--card); padding: 22px 24px; margin: 0 0 26px; }
+@media (max-width: 980px) {
+  .layout { grid-template-columns: 1fr; }
+}
+fieldset.card { border-top: 2px solid var(--accent); background: var(--card); padding: 22px 24px 8px; margin: 0 0 26px; }
+fieldset.card legend { font-family: var(--serif); font-size: 21px; font-weight: 600; padding: 2px 10px; background: var(--card); }
+div.card { border-top: 2px solid var(--accent); padding: 22px 24px; margin: 0 0 26px; }
 div.card h2 { font-family: var(--serif); font-size: 21px; font-weight: 600; margin: 0 0 8px; }
 div.card .actions { max-width: 430px; }
 .hint { color: var(--muted); font-size: 14px; margin: 0 0 14px; }
 .field { margin-bottom: 16px; }
 .field label { display: block; font-weight: 700; font-size: 14.5px; margin-bottom: 5px; }
 .field .sub { display: block; font-weight: 400; color: var(--muted); font-size: 13.5px; margin-top: 2px; }
-.field input[type="text"], .field input[type="url"], .field select, .field textarea {
-  width: 100%; font: inherit; font-size: 15px; padding: 9px 11px; border: 1px solid #b9b2a4; border-radius: 4px; background: #fff; color: var(--ink); }
+.field input[type="text"], .field input[type="url"], .field select, .field textarea { width: 100%; font: inherit; font-size: 15px; padding: 9px 11px; border: 1px solid #b9b2a4; border-radius: 4px; background: #fff; color: var(--ink); }
 .field textarea { min-height: 74px; resize: vertical; }
 .field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-@media (max-width: 620px) { .two { grid-template-columns: 1fr; } }
+@media (max-width: 620px) {
+  .two { grid-template-columns: 1fr; }
+}
 .checks { display: flex; flex-direction: column; gap: 8px; margin: 4px 0 14px; }
 .checks label { display: flex; gap: 9px; align-items: flex-start; font-size: 14.5px; font-weight: 400; cursor: pointer; }
 .checks input { margin-top: 4px; accent-color: var(--accent); width: 16px; height: 16px; flex: none; }
@@ -88,7 +93,7 @@ div.card .actions { max-width: 430px; }
 .text-btn.arming { color: #b3261e; font-weight: 700; text-decoration: none; }
 .add-btn { font: inherit; font-weight: 700; font-size: 14.5px; padding: 10px 16px; border: 1.5px dashed var(--accent); color: var(--accent); border-radius: 4px; background: none; cursor: pointer; margin-bottom: 18px; }
 .add-btn:hover { background: var(--tint); }
-.side { position: sticky; top: 18px; align-self: start; display: flex; flex-direction: column; gap: 20px; height: calc(100vh - 36px); }
+.side { position: sticky; top: 18px; align-self: start; display: flex; flex-direction: column; height: calc(100vh - 36px); }
 .side .panel { display: flex; flex-direction: column; min-height: 0; }
 .side .panel > h3 { flex: none; }
 .side .panel .inner { min-height: 0; }
@@ -142,8 +147,7 @@ dialog#file-dialog .dlg-head h3 { margin: 0; font-family: var(--serif); font-siz
 dialog#file-dialog pre { margin: 0; padding: 16px 18px; max-height: 58vh; overflow: auto; font-family: var(--mono); font-size: 12px; line-height: 1.55; white-space: pre-wrap; word-break: break-word; }
 dialog#file-dialog .dlg-foot { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; padding: 14px 18px; border-top: 1px solid var(--line); }
 dialog#file-dialog .dlg-foot .btn { width: auto; padding: 9px 16px; font-size: 14px; }
-
-.tabs { display: flex; gap: 28px; border-bottom: 1px solid var(--line); margin: 30px 0 0; }
+.tabs { display: flex; border-bottom: 1px solid var(--line); margin: 30px 0 0; }
 .tab { font: inherit; font-weight: 700; font-size: 16.5px; background: none; border: 0; border-bottom: 3px solid transparent; margin-bottom: -1px; padding: 10px 2px; cursor: pointer; color: var(--muted); }
 .tab:hover { color: var(--ink); }
 .tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
@@ -159,7 +163,83 @@ code.path { white-space: nowrap; }
 .startfrom .fine { flex-basis: 100%; margin: 0; }
 footer { border-top: 2px solid var(--ink); margin-top: 60px; padding: 26px 0 46px; color: var(--muted); font-size: 14px; }
 footer a { color: var(--accent); }
+/* ===== right rail panels become sheets (specimen) ===== */
+.side .panel { position: relative; overflow: visible; background:#fff; border:1.5px solid var(--ink); border-radius:3px; box-shadow: 7px 7px 0 #f3edda, 13px 13px 0 #faf5e4; }
+.side .panel > h3 { border-radius: 2px 2px 0 0; }
+.side .panel::before { content:""; position:absolute; top:-14px; left:50%; transform: translateX(-50%); width:118px; height:27px; background: rgba(233,180,76,.55); border-left:2px dashed rgba(25,24,23,.12); border-right:2px dashed rgba(25,24,23,.12); z-index:2; }
+/* ===== paper clips on the form cards + flat sheet border (specimen) ===== */
+fieldset.card { border: 1.5px solid var(--ink); border-radius: 3px; position: relative; }
+.clip { position: absolute; transform: rotate(-8deg); line-height: 0; z-index: 2; }
+/* ===== clips overlay the border, bigger (specimen) ===== */
+.clip { top: -24px; left: 10px; filter: drop-shadow(1px 2px 1px rgba(25,24,23,.20)); }
+/* ===== titles sit closer to the clip (specimen) ===== */
+/* ===== titles left, visibly (specimen) ===== */
+fieldset.card legend { margin-left: 12px; }
+/* ===== tabs become stick-on index tabs (specimen) ===== */
+.tabs { gap: 10px; align-items: flex-end; }
+.tabs .tab { position: relative; border: 1px solid rgba(25,24,23,.28); border-bottom: none; border-radius: 8px 8px 0 0; font-weight: 600; box-shadow: none; }
+.tabs .tab[data-route="build"] { --tab: #e9b44c; --tabtint: #faedcb; }
+.tabs .tab[data-route="files"] { --tab: #8faec4; --tabtint: #e2ebf1; }
+.tabs .tab[data-route="ai"] { --tab: #eda26b; --tabtint: #fce7d2; }
+.tabs .tab[aria-selected="true"] { border-color: rgba(25,24,23,.45); box-shadow: none; }
+/* ===== tabs become Post-it style tabs: white body, color band, flappy hover (specimen) ===== */
+.tabs .tab { overflow: hidden; background: #fffdf7; color: rgba(25,24,23,.68); padding: 7px 42px 9px 16px; transform-origin: bottom left; transition: transform .18s ease, background .18s ease, color .18s ease; }
+.tabs .tab::after { content:""; position:absolute; right:0; top:0; bottom:0; width:25px; background: var(--tab); border-left: 1px solid rgba(25,24,23,.18); }
+.tabs .tab[aria-selected="true"] { background: #fff; color: var(--ink); padding-top: 10px; }
+.tabs .tab:hover { transform: translateY(-2px) rotate(-1.3deg); color: var(--ink); box-shadow: 2px -2px 6px rgba(25,24,23,.10); }
+.tabs .tab:active { transform: translateY(0) rotate(.6deg); }
+@media (prefers-reduced-motion: reduce) {
+  .tabs .tab { transition: none; }
+  .tabs .tab:hover, .tabs .tab:active { transform: none; }
+}
+/* ===== the line runs under every tab; only the selected one breaks it (specimen) ===== */
+.tabs .tab { margin-bottom: 0; }
+.tabs .tab[aria-selected="true"] { margin-bottom: -1px; position: relative; z-index: 1; }
+/* ===== a run of line before the first tab (specimen) ===== */
+.tabs { padding-left: 24px; }
+/* ===== footer brand row, same as the homepage (specimen) ===== */
+.foot-brand { display:flex; align-items:center; gap:11px; margin-bottom:18px; }
+.foot-name { font-family: var(--serif); font-weight:600; font-size:20px; }
+/* ===== footer logo easter egg, same as the homepage (specimen) ===== */
+.foot-logo .egg-zone { cursor: pointer; transition: opacity .15s ease; }
+.foot-logo .egg-zone:hover { opacity: .78; }
+.egg { border:1.5px solid var(--ink); background:#fff; box-shadow: 7px 7px 0 #f3edda, 13px 13px 0 #faf5e4; padding: 10px 12px 8px; margin: 4px 0 26px; }
+.egg canvas { display:block; width:100%; height:auto; }
+.egg-cap { display:flex; justify-content:space-between; gap:12px; border-top:1px solid var(--line); padding-top:7px; margin-top:4px; font-family: var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform: uppercase; color: var(--muted); }
+/* ===== the two ending cards get the connect treatment: sheet + two corner tapes (specimen) ===== */
+div.card { position: relative; background:#fff; border:1.5px solid var(--ink); border-radius:3px; box-shadow: 7px 7px 0 #f3edda, 13px 13px 0 #faf5e4; }
+div.card::before, div.card::after { content:""; position:absolute; background: rgba(233,180,76,.55); border-left:2px dashed rgba(25,24,23,.12); border-right:2px dashed rgba(25,24,23,.12); z-index:2; }
+div.card::before { transform: rotate(-42deg); }
+div.card::after { transform: rotate(-40deg); }
+/* ===== smaller corner tapes, more air around the pair and the rail (specimen) ===== */
+div.card::before { width:64px; height:20px; top:-9px; left:-20px; }
+div.card::after { width:54px; height:20px; bottom:-9px; right:-17px; }
+div.card { margin-top: 40px; margin-bottom: 44px; }
+.side { gap: 34px; }
+/* ===== small screens: header wraps, criterion name field can shrink, card tapes tuck in (specimen) ===== */
+@media (max-width: 720px) {
+  header { flex-wrap: wrap; }
+  header nav { margin-left: 0; }
+  .crit-head { flex-wrap: wrap; }
+  .crit-head input { min-width: 0; flex-basis: 150px; }
+  div.card::before { left: -12px; }
+  div.card::after { right: -10px; }
+}
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </head>
 <body>
 <div class="wrap">
@@ -221,7 +301,7 @@ footer a { color: var(--accent); }
 <div class="layout">
 <form id="builder" autocomplete="off">
 
-  <fieldset class="card">
+  <fieldset class="card"><span class="clip" aria-hidden="true"><svg viewBox="0 0 20 44" width="20" height="44"><path d="M10 2.5a6 6 0 0 1 6 6v21a6 6 0 0 1-12 0v-18a4 4 0 0 1 8 0v17" fill="none" stroke="#8f8b82" stroke-width="2.4" stroke-linecap="round"/></svg></span>
     <legend>The basics</legend>
     <p class="hint">These answers become the file's frontmatter, the part machines and other AIs read first.</p>
     <div class="field">
@@ -285,7 +365,7 @@ footer a { color: var(--accent); }
     </div>
   </fieldset>
 
-  <fieldset class="card" id="source-card" hidden>
+  <fieldset class="card" id="source-card" hidden><span class="clip" aria-hidden="true"><svg viewBox="0 0 20 44" width="20" height="44"><path d="M10 2.5a6 6 0 0 1 6 6v21a6 6 0 0 1-12 0v-18a4 4 0 0 1 8 0v17" fill="none" stroke="#8f8b82" stroke-width="2.4" stroke-linecap="round"/></svg></span>
     <legend>Based on a published source</legend>
     <p class="hint">Fill this in only when the rubric adapts a method or framework someone published. The file carries two credits: you as the rubric's author, and the source's author for the framework. Write everything in your own words; never paste the source's definitions or examples into the rubric.</p>
     <div class="two">
@@ -308,7 +388,7 @@ footer a { color: var(--accent); }
     </div>
   </fieldset>
 
-  <fieldset class="card">
+  <fieldset class="card"><span class="clip" aria-hidden="true"><svg viewBox="0 0 20 44" width="20" height="44"><path d="M10 2.5a6 6 0 0 1 6 6v21a6 6 0 0 1-12 0v-18a4 4 0 0 1 8 0v17" fill="none" stroke="#8f8b82" stroke-width="2.4" stroke-linecap="round"/></svg></span>
     <legend>Purpose</legend>
     <div class="field">
       <label for="f-purpose">What this rubric evaluates, and what it is for <span class="sub">Name what it is not for as well, so the AI does not stretch it onto work it cannot judge. If the AI should refuse to run in some situation, for example when the input has nothing analyzable in it, say so here.</span></label>
@@ -330,7 +410,7 @@ footer a { color: var(--accent); }
     </div>
   </fieldset>
 
-  <fieldset class="card">
+  <fieldset class="card"><span class="clip" aria-hidden="true"><svg viewBox="0 0 20 44" width="20" height="44"><path d="M10 2.5a6 6 0 0 1 6 6v21a6 6 0 0 1-12 0v-18a4 4 0 0 1 8 0v17" fill="none" stroke="#8f8b82" stroke-width="2.4" stroke-linecap="round"/></svg></span>
     <legend>Criteria</legend>
     <p class="hint">One card per criterion. Write what good and bad look like concretely enough that two runs would judge the same work the same way. Most rubrics carry three to seven criteria.</p>
     <div class="field">
@@ -341,7 +421,7 @@ footer a { color: var(--accent); }
     <button type="button" class="add-btn" id="add-criterion">+ Add a criterion</button>
   </fieldset>
 
-  <fieldset class="card">
+  <fieldset class="card"><span class="clip" aria-hidden="true"><svg viewBox="0 0 20 44" width="20" height="44"><path d="M10 2.5a6 6 0 0 1 6 6v21a6 6 0 0 1-12 0v-18a4 4 0 0 1 8 0v17" fill="none" stroke="#8f8b82" stroke-width="2.4" stroke-linecap="round"/></svg></span>
     <legend>Scoring</legend>
     <div class="field">
       <label for="f-scale-mode">How does this rubric score?</label>
@@ -362,7 +442,7 @@ footer a { color: var(--accent); }
     </div>
   </fieldset>
 
-  <fieldset class="card">
+  <fieldset class="card"><span class="clip" aria-hidden="true"><svg viewBox="0 0 20 44" width="20" height="44"><path d="M10 2.5a6 6 0 0 1 6 6v21a6 6 0 0 1-12 0v-18a4 4 0 0 1 8 0v17" fill="none" stroke="#8f8b82" stroke-width="2.4" stroke-linecap="round"/></svg></span>
     <legend>Output format</legend>
     <p class="hint">The exact structure the AI must return. The Rubric summary block that every report ends with is specified for you at the end, generated from your rubric's name and scale, because its shape is fixed across the library.</p>
     <div class="field">
@@ -373,7 +453,7 @@ footer a { color: var(--accent); }
     </div>
   </fieldset>
 
-  <fieldset class="card">
+  <fieldset class="card"><span class="clip" aria-hidden="true"><svg viewBox="0 0 20 44" width="20" height="44"><path d="M10 2.5a6 6 0 0 1 6 6v21a6 6 0 0 1-12 0v-18a4 4 0 0 1 8 0v17" fill="none" stroke="#8f8b82" stroke-width="2.4" stroke-linecap="round"/></svg></span>
     <legend>Honesty rules</legend>
     <p class="hint">The claims the AI must not make while running this rubric. Tick the standard ones that apply, then add your own.</p>
     <div class="checks" id="honesty-checks">
@@ -388,7 +468,7 @@ footer a { color: var(--accent); }
     </div>
   </fieldset>
 
-  <fieldset class="card">
+  <fieldset class="card"><span class="clip" aria-hidden="true"><svg viewBox="0 0 20 44" width="20" height="44"><path d="M10 2.5a6 6 0 0 1 6 6v21a6 6 0 0 1-12 0v-18a4 4 0 0 1 8 0v17" fill="none" stroke="#8f8b82" stroke-width="2.4" stroke-linecap="round"/></svg></span>
     <legend>Worked example (for submitting)</legend>
     <p class="hint">A library contribution includes one worked example: your rubric, run once, with its output kept as the rubric produced it. Run your rubric in your own AI against a screen or document of yours, or one of the sample fixtures in the repository, and paste the output here. You can download it as the example file, and include it when you submit. For your own use of the rubric, this part is optional.</p>
     <div class="field">
@@ -480,6 +560,17 @@ footer a { color: var(--accent); }
 </dialog>
 
 <footer>
+  <div class="foot-brand"><svg class="foot-logo" viewBox="0 0 48 48" width="34" height="34" role="img" aria-label="ProductRubric logo">
+<rect x="0" y="0" width="22" height="22" rx="3" fill="#292622" class="egg-zone"/>
+<path d="M25.5 0h19a3 3 0 0 1 3 3v11c0 4.4-3.6 8-8 8h-14z" fill="#f3e9cf"/>
+<polyline points="31,11.5 35.3,15.8 43,7.5" fill="none" stroke="#9e2a2b" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="0" y="25.5" width="22" height="22" rx="3" fill="#292622" class="egg-zone"/>
+<path class="egg-zone" d="M25.5 33 L33 25.5h11.5a3 3 0 0 1 3 3V44.5a3 3 0 0 1-3 3H28.5a3 3 0 0 1-3-3z" fill="#292622"/>
+</svg><span class="foot-name">ProductRubric</span></div>
+    <div class="egg" id="egg" hidden>
+      <canvas id="egg-cv" width="680" height="128"></canvas>
+      <div class="egg-cap"><span>Space, click, or tap to jump the unchecked boxes</span><span class="egg-score" id="egg-score">Checked: 0</span></div>
+    </div>
   <p>ProductRubric is an open library of evaluation rubrics for product teams. Rubric text is licensed CC BY 4.0 with its author credited. The format this page writes is described in <a href="https://github.com/productrubric/product-rubric/blob/main/FORMAT.md">FORMAT.md</a>, and contributions are reviewed under the rules in <a href="https://github.com/productrubric/product-rubric/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>.</p>
 </footer>
 </div>
@@ -2710,6 +2801,67 @@ function init() {
   refresh();
 }
 document.addEventListener("DOMContentLoaded", init);
+</script>
+<script>
+(function () {
+  var panel = document.getElementById('egg'), cv = document.getElementById('egg-cv');
+  if (!panel || !cv) return;
+  var ctx = cv.getContext('2d'), scoreEl = document.getElementById('egg-score');
+  var W = cv.width, H = cv.height, GY = 104;
+  var running = false, over = false, jumpH = 0, vy = 0, speed = 4.6, frame = 0, nextIn = 60, score = 0, obs = [];
+  function reset() { obs = []; jumpH = 0; vy = 0; speed = 4.6; frame = 0; nextIn = 70; score = 0; over = false; scoreEl.textContent = 'Checked: 0'; }
+  function jump() {
+    if (over) { reset(); return; }
+    if (jumpH === 0) vy = 12.4;
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(25,24,23,.25)'; ctx.lineWidth = 1;
+    ctx.setLineDash([5, 6]); ctx.beginPath(); ctx.moveTo(0, GY + .5); ctx.lineTo(W, GY + .5); ctx.stroke(); ctx.setLineDash([]);
+    for (var i = 0; i < obs.length; i++) {
+      var o = obs[i];
+      ctx.fillStyle = '#fffdf7'; ctx.strokeStyle = '#191817'; ctx.lineWidth = 2;
+      ctx.fillRect(o.x, GY - o.h, o.w, o.h); ctx.strokeRect(o.x, GY - o.h, o.w, o.h);
+    }
+    var px = 44, py = GY - jumpH;
+    ctx.strokeStyle = '#9e2a2b'; ctx.lineWidth = 5.5; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.beginPath(); ctx.moveTo(px, py - 11); ctx.lineTo(px + 8, py - 3); ctx.lineTo(px + 22, py - 19); ctx.stroke();
+    if (over) {
+      ctx.fillStyle = 'rgba(255,253,247,.88)'; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#191817'; ctx.font = '600 21px Newsreader, Georgia, serif'; ctx.textAlign = 'center';
+      ctx.fillText('Checked out.', W / 2, 58);
+      ctx.font = '11px "Spline Sans Mono", monospace'; ctx.fillStyle = '#6b675e';
+      ctx.fillText('CLICK TO RUN IT AGAIN', W / 2, 80); ctx.textAlign = 'left';
+    }
+  }
+  function tick() {
+    if (!running) return;
+    frame++;
+    if (jumpH > 0 || vy > 0) { jumpH += vy; vy -= 0.62; if (jumpH <= 0) { jumpH = 0; vy = 0; } }
+    if (--nextIn <= 0) { var w = 15 + Math.random() * 6; obs.push({ x: W + 10, w: w, h: 17, passed: false }); nextIn = 68 + Math.random() * 62 - Math.min(22, speed * 2); }
+    for (var i = obs.length - 1; i >= 0; i--) {
+      var o = obs[i]; o.x -= speed;
+      if (!o.passed && o.x + o.w < 44) { o.passed = true; score++; scoreEl.textContent = 'Checked: ' + score; }
+      if (o.x + o.w < -12) obs.splice(i, 1);
+      if (o.x < 68 && o.x + o.w > 44 && jumpH < o.h) { over = true; running = false; draw(); return; }
+    }
+    speed = Math.min(9.2, speed + 0.0016);
+    draw();
+    requestAnimationFrame(tick);
+  }
+  function start() { if (!running && !over) { running = true; requestAnimationFrame(tick); } }
+  function toggle() {
+    if (panel.hidden) { panel.hidden = false; reset(); draw(); start(); }
+    else { panel.hidden = true; running = false; }
+  }
+  var zones = document.querySelectorAll('.foot-logo .egg-zone');
+  for (var i = 0; i < zones.length; i++) zones[i].addEventListener('click', toggle);
+  panel.addEventListener('pointerdown', function (e) { e.preventDefault(); jump(); start(); });
+  document.addEventListener('keydown', function (e) {
+    if (!panel.hidden && (e.code === 'Space' || e.code === 'ArrowUp')) { e.preventDefault(); jump(); start(); }
+  });
+  draw();
+})();
 </script>
 </body>
 </html>
