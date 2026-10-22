@@ -530,6 +530,17 @@ p { text-wrap: pretty; }
 .egg { border:1.5px solid var(--ink); background:#fff; box-shadow: 7px 7px 0 #f3edda, 13px 13px 0 #faf5e4; padding: 10px 12px 8px; margin: 4px 0 26px; }
 .egg canvas { display:block; width:100%; height:auto; }
 .egg-cap { display:flex; justify-content:space-between; gap:12px; border-top:1px solid var(--line); padding-top:7px; margin-top:4px; font-family: var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform: uppercase; color: var(--muted); }
+
+/* ===== small screens: header wraps, folder tabs scroll on one edge, tapes tuck in ===== */
+@media (max-width: 720px) {
+  header { flex-wrap: wrap; }
+  header nav { margin-left: 0; }
+  .lib-chips { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .lib-chips::-webkit-scrollbar { display: none; }
+  .lib-chip { flex: 0 0 auto; white-space: nowrap; }
+  .connect .ctape.tl { left: -16px; }
+  .connect .ctape.br { right: -14px; }
+}
 </style>
 
 
