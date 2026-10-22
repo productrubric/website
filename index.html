@@ -145,26 +145,21 @@
 <script>document.documentElement.classList.add("js");</script>
 <style>
 :root { --serif: "Newsreader", Georgia, "Times New Roman", serif; --sans: "Hanken Grotesk", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; --mono: "Martian Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-code,.attach,.tool-line,.demo .bar .who,.level,.lvl{font-stretch:87.5%}
-:root {
-  --ink: #191817; --paper: #fffdf7; --muted: #6b6660; --line: #e4ded2;
-  --accent: #9e2a2b; --accent-deep: #9e2a2b; --card: #fffdf7;
-  --tint: #faf6ec; --hover: #f4efe2;
-}
+code,.attach,.tool-line,.demo .bar .who,.level,.lvl { font-stretch:87.5%; }
+:root { --ink: #191817; --paper: #fffdf7; --muted: #6b6660; --line: #e4ded2; --accent: #9e2a2b; --accent-deep: #9e2a2b; --card: #fffdf7; --tint: #faf6ec; --hover: #f4efe2; }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 ::selection { background: var(--accent); color: #fff; }
-body { margin: 0; background: var(--paper); color: var(--ink);
-  font-family: var(--sans); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.65; -webkit-font-smoothing: antialiased; }
 .wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
-section > p { max-width: 72ch; }
 .faq dd { max-width: 75ch; }
-@media (max-width: 480px) { .wrap { padding: 0 20px; } }
+@media (max-width: 480px) {
+  .wrap { padding: 0 20px; }
+}
 .skip { position: absolute; left: 12px; top: -80px; z-index: 20; background: var(--ink); color: var(--paper); padding: 10px 14px; border-radius: 4px; font-weight: 700; text-decoration: none; }
 .skip:focus { top: 12px; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 main:focus { outline: none; }
-
 header { padding: 26px 0 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--ink); }
 header img { width: 36px; height: 36px; display: block; }
 header .name { font-family: var(--serif); font-size: 23px; font-weight: 700; letter-spacing: -0.01em; }
@@ -173,14 +168,15 @@ header nav a { font-weight: 600; font-size: 14.5px; color: var(--ink); text-deco
 header nav a:hover { border-color: var(--line); }
 header nav a.btn { background: var(--ink); color: var(--paper); border-color: var(--ink); font-weight: 700; margin-left: 14px; }
 header nav a.btn:hover { background: #33302d; }
-
 .hero { padding: 64px 0 10px; display: grid; grid-template-columns: minmax(0, 700px) minmax(0, 1fr); gap: 54px; align-items: start; }
-@media (max-width: 1020px) { .hero { grid-template-columns: 1fr; gap: 34px; } .hero-visual { max-width: 520px; } }
+@media (max-width: 1020px) {
+  .hero { grid-template-columns: 1fr; gap: 34px; }
+  .hero-visual { max-width: 520px; }
+}
 .hero-visual .cap { font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
 .rstack { display: grid; margin-top: 12px; }
-.rcard { grid-area: 1 / 1; display: block; text-decoration: none; color: var(--ink); background: #fff; border: 2px solid var(--ink); border-top: 6px solid var(--accent); border-radius: 6px; padding: 22px 24px 18px; opacity: 0; visibility: hidden; transition: opacity 0.7s ease, visibility 0.7s ease; box-shadow: 8px 8px 0 rgba(25, 24, 23, 0.06); }
+.rcard { grid-area: 1 / 1; display: block; text-decoration: none; color: var(--ink); border-top: 6px solid var(--accent); padding: 22px 24px 18px; opacity: 0; visibility: hidden; transition: opacity 0.7s ease, visibility 0.7s ease; }
 .rcard.on { opacity: 1; visibility: visible; }
-.rcard:hover { box-shadow: 8px 8px 0 rgba(158, 42, 43, 0.14); }
 .rcard .rtop { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.12em; }
 .rcard .rcat { color: var(--accent); }
 .rcard .rcount { color: var(--muted); }
@@ -193,16 +189,19 @@ header nav a.btn:hover { background: #33302d; }
 .rcard .rscale { font-family: var(--mono); font-size: 12px; letter-spacing: 0.05em; color: var(--accent); }
 .rcard .rcredit { font-size: 13.5px; color: var(--muted); margin-top: 3px; }
 .rcard .rgo { font-size: 13.5px; font-weight: 700; margin-top: 8px; }
-.rdots { display: flex; gap: 8px; margin-top: 16px; }
-.rdots button { width: 26px; height: 4px; border: 0; border-radius: 2px; background: var(--line); padding: 0; cursor: pointer; }
-.rdots button.on { background: var(--accent); }
-@media (prefers-reduced-motion: reduce) { .rcard { transition: none; } }
+.rdots { display: flex; }
+.rdots button { cursor: pointer; }
+@media (prefers-reduced-motion: reduce) {
+  .rcard { transition: none; }
+}
 .hero h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(38px, 6vw, 58px); line-height: 1.08; letter-spacing: -0.015em; margin: 0 0 22px; max-width: 720px; }
 .hero p { font-size: 18.5px; color: #2b2b2e; max-width: 660px; margin: 0 0 14px; }
-@media (max-width: 480px) { .hero { padding-top: 44px; } .hero p { font-size: 17px; } }
+@media (max-width: 480px) {
+  .hero { padding-top: 44px; }
+  .hero p { font-size: 17px; }
+}
 .hero h1 .hl { color: #9e2a2b; }
-
-.connect { background: var(--card); color: #191817; border-radius: 4px; padding: 30px 32px; margin: 38px 0 6px; border: 2px solid var(--ink); border-top: 6px solid var(--accent); }
+.connect { color: #191817; padding: 30px 32px; margin: 38px 0 6px; border-top: 6px solid var(--accent); }
 .connect h2 { font-family: var(--serif); font-weight: 600; margin: 0 0 8px; font-size: 24px; line-height: 1.2; }
 .connect p { margin: 0 0 18px; color: #4c463f; max-width: 60ch; }
 .connect .row { display: flex; flex-wrap: wrap; align-items: stretch; max-width: 34rem; }
@@ -215,7 +214,6 @@ header nav a.btn:hover { background: #33302d; }
   .connect code { flex-basis: 100%; border-radius: 4px 4px 0 0; font-size: 13px; padding: 12px 12px; }
   .connect button { flex: 1 1 100%; border-radius: 0 0 4px 4px; }
 }
-
 main { counter-reset: sec; }
 section { position: relative; padding: 30px 0 4px; margin-top: 52px; border-top: 2px solid var(--ink); counter-reset: rubric; }
 .kicker { font-family: var(--mono); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent); margin-bottom: 8px; }
@@ -227,7 +225,6 @@ section > h2::before { counter-increment: sec; content: counter(sec); color: var
 section h2 { font-family: var(--serif); font-weight: 600; font-size: 27px; line-height: 1.2; letter-spacing: -0.01em; margin: 0 0 8px; }
 section > p { max-width: 68ch; color: #2b2b2e; }
 section .sub { color: var(--muted); margin: 0 0 16px; }
-
 /* Demo */
 .demo { background: #fff; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; margin-top: 26px; position: relative; }
 .demo .bar { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-bottom: 1px solid var(--line); background: var(--tint); }
@@ -240,18 +237,24 @@ section .sub { color: var(--muted); margin: 0 0 16px; }
 .tool-line .pulse { width: 7px; height: 7px; background: var(--accent); animation: pulse 1.6s infinite; }
 @keyframes pulse { 50% { opacity: 0.3; } }
 .bubble-ai { align-self: flex-start; max-width: 92%; background: var(--tint); border: 1px solid var(--line); border-radius: 4px; padding: 14px 16px; font-size: 14.5px; line-height: 1.55; position: relative; font-variant-numeric: tabular-nums; }
-.bubble-ai p { margin: 0 0 9px; } .bubble-ai p:last-child { margin-bottom: 0; }
-.bubble-ai .tag { font-weight: 700; } .bubble-ai .bad { color: #b3261e; font-weight: 700; } .bubble-ai .warn { color: #855b00; font-weight: 700; }
+.bubble-ai p { margin: 0 0 9px; }
+.bubble-ai p:last-child { margin-bottom: 0; }
+.bubble-ai .tag { font-weight: 700; }
+.bubble-ai .bad { color: #b3261e; font-weight: 700; }
+.bubble-ai .warn { color: #855b00; font-weight: 700; }
 .demo .foot { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 14px; padding: 0 22px 20px; }
 .demo .foot p { margin: 0; color: var(--muted); font-size: 13.5px; flex: 1 1 18rem; }
 .demo button.replay { margin-left: auto; background: none; border: 1px solid var(--ink); color: var(--ink); border-radius: 4px; padding: 7px 14px; font: inherit; font-weight: 600; font-size: 13.5px; cursor: pointer; }
 .demo button.replay:hover { background: var(--ink); color: var(--paper); }
-@media (max-width: 480px) { .demo .body { padding: 16px 14px 20px; } .bubble-user, .bubble-ai { max-width: 100%; } .demo .foot { padding: 0 14px 16px; } }
+@media (max-width: 480px) {
+  .demo .body { padding: 16px 14px 20px; }
+  .bubble-user, .bubble-ai { max-width: 100%; }
+  .demo .foot { padding: 0 14px 16px; }
+}
 html.js .demo [data-anim] { opacity: 0; transform: translateY(6px); transition: opacity 0.45s ease, transform 0.45s ease; }
 html.js .demo [data-anim].on { opacity: 1; transform: none; }
 .caret::after { content: "\2588"; margin-left: 1px; animation: blink 0.9s steps(1) infinite; color: #e9b8b8; }
 @keyframes blink { 50% { opacity: 0; } }
-
 /* Recordings */
 #recordings h2 { position: relative; }
 #recordings h2::before { counter-increment: sec; content: counter(sec); color: var(--accent); font-variant-numeric: oldstyle-nums proportional-nums; font-feature-settings: "onum" 1, "pnum" 1; display: inline-block; min-width: 0.9em; margin-right: 0.45em; }
@@ -264,14 +267,14 @@ html.js .demo [data-anim].on { opacity: 1; transform: none; }
 .rec-label .ic { flex: none; display: block; }
 .rec-label .t { margin-left: auto; font-family: var(--mono); font-size: 12.5px; font-weight: 500; color: var(--muted); }
 .rec-label:hover { background: var(--hover); }
-.rec-label.is-active { color: var(--ink); box-shadow: inset 3px 0 0 var(--accent); }
+.rec-label.is-active { color: var(--ink); }
 .rec-label.is-active .ic { color: var(--accent); }
 .rec-cap { margin: 18px 0 0; color: #333338; font-size: 15px; max-width: 52ch; }
 .rec-value { margin: 16px 0 0; color: #333338; font-size: 15px; max-width: 52ch; }
 .rec-value strong { color: var(--ink); }
 .rec-stage { min-width: 0; }
 .vid { margin: 0 auto; max-width: 470px; background: #fff; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
-.vid .bar { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-bottom: 1px solid var(--line); background: var(--tint); }
+.vid .bar { display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--line); background: var(--tint); }
 .vid .bar .who { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
 .vid video { display: block; width: 100%; height: auto; background: var(--tint); }
 html.js .rec-slide { display: none; }
@@ -281,14 +284,18 @@ html.js .rec-slide.is-active { display: block; }
 .rec-btn:hover:not(:disabled) { background: var(--ink); color: var(--paper); }
 .rec-btn:disabled { opacity: 0.3; cursor: default; }
 .rec-count { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
-@media (max-width: 860px) { .rec-grid { grid-template-columns: 1fr; } .rec-stage { margin-top: 12px; } }
-
+@media (max-width: 860px) {
+  .rec-grid { grid-template-columns: 1fr; }
+  .rec-stage { margin-top: 12px; }
+}
 /* Level key */
 .levels { margin: 0 0 20px; padding: 12px 0 14px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); display: grid; grid-template-columns: max-content 1fr; gap: 6px 18px; font-size: 14.5px; max-width: 72ch; }
 .levels dt { margin: 0; }
 .levels dd { margin: 0; color: #3a3a3e; }
-@media (max-width: 560px) { .levels { grid-template-columns: 1fr; gap: 2px; } .levels dd { margin-bottom: 8px; } }
-
+@media (max-width: 560px) {
+  .levels { grid-template-columns: 1fr; gap: 2px; }
+  .levels dd { margin-bottom: 8px; }
+}
 /* Rubric rows */
 details.rubric { border-top: 1px solid var(--line); padding: 6px 0; }
 details.rubric:last-of-type { border-bottom: 1px solid var(--line); }
@@ -302,8 +309,16 @@ details.rubric .chev { justify-self: end; align-self: center; color: var(--accen
 details.rubric[open] .chev { transform: rotate(180deg); }
 details.rubric .meta { padding: 2px 8px 18px 54px; max-width: 780px; font-variant-numeric: tabular-nums; }
 details.rubric .meta p { margin: 6px 0; color: #333338; max-width: 72ch; }
-@media (max-width: 720px) { details.rubric summary { grid-template-columns: 30px 1fr 26px; row-gap: 6px; } details.rubric .level { grid-column: 2; justify-self: start; } details.rubric .short { grid-column: 2 / -1; } details.rubric .chev { grid-column: 3; grid-row: 1; } details.rubric .meta { padding-left: 46px; } }
-@media (max-width: 400px) { details.rubric .meta { padding-left: 8px; } }
+@media (max-width: 720px) {
+  details.rubric summary { grid-template-columns: 30px 1fr 26px; row-gap: 6px; }
+  details.rubric .level { grid-column: 2; justify-self: start; }
+  details.rubric .short { grid-column: 2 / -1; }
+  details.rubric .chev { grid-column: 3; grid-row: 1; }
+  details.rubric .meta { padding-left: 46px; }
+}
+@media (max-width: 400px) {
+  details.rubric .meta { padding-left: 8px; }
+}
 .level, .lvl { font-family: var(--mono); font-size: 11.5px; font-weight: 500; color: #3a3a3e; white-space: nowrap; position: relative; justify-self: start; }
 .level::before, .lvl::before { font-size: 9px; letter-spacing: 2px; color: var(--accent); margin-right: 7px; vertical-align: 1px; }
 .level[data-tip^="Simple"]::before, .lvl-simple::before { content: "\25A0\25A1\25A1"; }
@@ -313,22 +328,21 @@ details.rubric .meta p { margin: 6px 0; color: #333338; max-width: 72ch; }
   .level { cursor: help; }
   .level:hover::after { content: attr(data-tip); position: absolute; left: 0; top: 150%; z-index: 5; width: 260px; white-space: normal; background: var(--ink); color: #f2f2f0; font-family: var(--sans); font-size: 13px; font-weight: 400; padding: 9px 11px; border-radius: 4px; line-height: 1.45; }
 }
-
 /* Three ways */
-.ways { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0; margin-top: 18px; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--line); }
-.way { padding: 18px 20px 20px 0; display: flex; flex-direction: column; }
+.ways { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+.way { display: flex; flex-direction: column; }
 .way + .way { border-left: 1px solid var(--line); padding-left: 20px; }
-@media (max-width: 760px) { .way + .way { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); } }
+@media (max-width: 760px) {
+  .way + .way { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); }
+}
 .way h3 { margin: 0 0 6px; font-family: var(--serif); font-weight: 600; font-size: 21px; line-height: 1.25; }
 .way p { margin: 0 0 16px; color: #333338; font-size: 15px; }
 .way a.card-link { align-self: flex-start; margin-top: auto; color: var(--ink); font-size: 14.5px; font-weight: 700; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; padding: 2px 0; }
 .way a.card-link::after { content: "\2192"; display: inline-block; margin-left: 6px; text-decoration: none; }
 .way a.card-link:hover { color: var(--accent); }
-
 .analogy { font-family: var(--serif); font-weight: 600; font-size: 23px; letter-spacing: -0.01em; padding: 34px 0 0; max-width: 640px; line-height: 1.35; }
 .analogy code { font-family: var(--mono); font-size: 0.86em; font-weight: 500; letter-spacing: -0.01em; }
 .note { color: var(--muted); font-size: 15px; max-width: 68ch; }
-
 details.faq { border-top: 1px solid var(--line); padding: 5px 0; }
 details.faq:last-of-type { border-bottom: 1px solid var(--line); }
 details.faq summary { cursor: pointer; font-weight: 600; padding: 11px 8px; list-style: none; border-radius: 4px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
@@ -337,35 +351,216 @@ details.faq summary:hover { background: var(--hover); }
 details.faq .chev { color: var(--accent-deep); display: inline-flex; flex: none; transition: transform 0.25s ease; }
 details.faq[open] .chev { transform: rotate(180deg); }
 details.faq p { margin: 0 8px 16px; color: #333338; max-width: 68ch; }
-
 footer { border-top: 1px solid var(--ink); margin-top: 54px; padding: 24px 0 44px; color: var(--muted); font-size: 15px; }
 footer p { max-width: 75ch; }
 footer a { color: var(--ink); }
 a { color: var(--ink); }
 a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--accent-deep); outline-offset: 2px; }
 .skip:focus-visible { outline-color: var(--paper); outline-offset: -4px; }
-
 @media (prefers-reduced-motion: reduce) {
   html.js .demo [data-anim] { opacity: 1; transform: none; transition: none; }
   .tool-line .pulse, .caret::after { animation: none; }
   details .chev { transition: none; }
 }
-  .who-row { display: grid; grid-template-columns: 215px 1fr; gap: 18px; padding: 14px 8px; border-top: 1px solid #e4ded2; }
-  .who-row:last-child { border-bottom: 1px solid #e4ded2; }
-  .who-row .who { font-weight: 700; font-size: 16px; }
-  .who-row p { margin: 0; color: #333338; max-width: 640px; }
-  @media (max-width: 640px) { .who-row { grid-template-columns: 1fr; gap: 4px; } }
-  .paste { margin: 22px 0 2px; }
-  .paste h3 { font-family: var(--serif); font-weight: 600; font-size: 19px; margin: 0 0 8px; }
-  .paste-row { display: grid; grid-template-columns: 30px 130px 1fr; gap: 14px; padding: 9px 8px; border-top: 1px solid #e4ded2; align-items: start; }
-  .paste-row .logo { color: #191817; line-height: 0; padding-top: 2px; }
-  .paste-row:last-child { border-bottom: 1px solid #e4ded2; }
-  .paste-row .tool { font-weight: 700; }
-  .paste-row p { margin: 0; color: #333338; max-width: 640px; }
-  .paste-row code { font-family: var(--mono); font-size: 12.5px; background: #faf6ec; padding: 1px 5px; border-radius: 3px; }
-  @media (max-width: 640px) { .paste-row { grid-template-columns: 30px 1fr; gap: 10px; } .paste-row p { grid-column: 2; } }
-  p { text-wrap: pretty; }
+.who-row { display: grid; grid-template-columns: 215px 1fr; gap: 18px; padding: 14px 8px; border-top: 1px solid #e4ded2; }
+.who-row:last-child { border-bottom: 1px solid #e4ded2; }
+.who-row .who { font-weight: 700; font-size: 16px; }
+.who-row p { margin: 0; color: #333338; max-width: 640px; }
+@media (max-width: 640px) {
+  .who-row { grid-template-columns: 1fr; gap: 4px; }
+}
+.paste { margin: 22px 0 2px; }
+.paste h3 { font-family: var(--serif); font-weight: 600; font-size: 19px; margin: 0 0 8px; }
+.paste-row { display: grid; grid-template-columns: 30px 130px 1fr; gap: 14px; padding: 9px 8px; border-top: 1px solid #e4ded2; align-items: start; }
+.paste-row .logo { color: #191817; line-height: 0; padding-top: 2px; }
+.paste-row:last-child { border-bottom: 1px solid #e4ded2; }
+.paste-row .tool { font-weight: 700; }
+.paste-row p { margin: 0; color: #333338; max-width: 640px; }
+.paste-row code { font-family: var(--mono); font-size: 12.5px; background: #faf6ec; padding: 1px 5px; border-radius: 3px; }
+@media (max-width: 640px) {
+  .paste-row { grid-template-columns: 30px 1fr; gap: 10px; }
+  .paste-row p { grid-column: 2; }
+}
+p { text-wrap: pretty; }
+/* ===== hero card: form border, type, shadow (specimen, no tilt) ===== */
+.rcard { position:relative; background:#fff; border:1.5px solid rgba(25,24,23,.6); border-radius:3px; box-shadow: 7px 7px 0 #f3edda, 13px 13px 0 #faf5e4; }
+.rcard:hover { box-shadow: 7px 7px 0 #f3edda, 13px 13px 0 #faf5e4, 0 14px 26px rgba(25,24,23,.10); }
+.rcard .rtape { position:absolute; top:-14px; left:50%; transform: translateX(-50%); width:118px; height:27px; background: rgba(233,180,76,.55); border-left:2px dashed rgba(25,24,23,.12); border-right:2px dashed rgba(25,24,23,.12); }
+/* ===== carousel pager: plain dots (specimen) ===== */
+.rdots { justify-content: center; gap: 4px; margin-top: 18px; }
+.rdots button { width: 26px; height: 26px; background: none; border: 0; border-radius: 50%; position: relative; padding: 0; }
+.rdots button::before { content:""; position:absolute; left:50%; top:50%; width:9px; height:9px; transform: translate(-50%,-50%); border-radius:50%; background: rgba(25,24,23,.20); transition: background .2s ease, transform .2s ease; }
+.rdots button:hover::before { background: rgba(25,24,23,.45); }
+.rdots button.on { background: none; }
+.rdots button.on::before { background: var(--accent); transform: translate(-50%,-50%) scale(1.25); }
+/* ===== connect block: form outline + tape at the left (specimen) ===== */
+.connect { position:relative; background:#fff; border:1.5px solid rgba(25,24,23,.6); border-radius:3px; box-shadow: 7px 7px 0 #f3edda, 13px 13px 0 #faf5e4; }
+.connect .ctape { position:absolute; top:-14px; left:44px; width:118px; height:27px; background: rgba(233,180,76,.55); border-left:2px dashed rgba(25,24,23,.12); border-right:2px dashed rgba(25,24,23,.12); }
+/* ===== connect corner tapes (specimen) ===== */
+.connect .ctape.br { top:auto; left:auto; }
+/* ===== connect corner tapes: shorter, seated on the corners (specimen) ===== */
+.connect .ctape.tl { width:84px; height:24px; top:-11px; left:-27px; transform: rotate(-42deg); }
+.connect .ctape.br { width:70px; height:24px; bottom:-11px; right:-23px; transform: rotate(-40deg); }
+/* ===== recordings: selected row wash (specimen) ===== */
+.rec-label.is-active { background: linear-gradient(90deg, rgba(233,180,76,.20), rgba(233,180,76,0) 82%); }
+/* ===== binder clip on the video frame (specimen) ===== */
+.rec-stage { position: relative; }
+.vidclip { position:absolute; top:-28px; left:50%; transform: translateX(-50%); width:58px; height:auto; z-index:3; filter: drop-shadow(0 2px 2px rgba(25,24,23,.22)); pointer-events:none; }
+/* ===== video sheet on a ring binding (specimen) ===== */
+.vidrings { position:absolute; left:50%; transform: translateX(-50%); width:470px; max-width:100%; height:28px; z-index:3; pointer-events:none; }
+/* ===== room for the binding: bar label sits lower (specimen) ===== */
+.vid .bar { padding: 20px 16px 10px; }
+.vidrings { top: -12px; }
+/* ===== scene rows: no red bar, drawn play marks (specimen) ===== */
+.rec-label.is-active { box-shadow: none; }
+.rec-label .ic { overflow: visible; }
+.rec-label .ic path { fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linejoin: round; stroke-linecap: round; }
+/* ===== the library, merged with filters (specimen) ===== */
+:root { --amber:#e9b44c; --blue:#8faec4; --peach:#eda26b; --blush:#e59aab; }
+.lib-chips { display:flex; }
+.lib-chip { font: inherit; font-weight:600; font-size:15px; cursor:pointer; color:#3c382f; }
+.lib-chip .n { font-family: var(--mono); font-size:12px; color: var(--muted); margin-left:4px; }
+.lib-count { font-family: var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color: var(--muted); margin:10px 0 0; }
+#library .levels { margin: 18px 0 6px; }
+.lib-group { margin-top: 30px; }
+.lib-cat { font-family: var(--serif); font-weight:600; font-size:23px; margin:0 0 4px; }
+.lib-group .sub { margin: 0 0 14px; }
+#library details.rubric { position: relative; }
+#library details.rubric::before { content:""; position:absolute; left:0; top:0; bottom:0; width:5px; background: var(--spine); }
+/* ===== library flags + spacing (specimen) ===== */
+#library details.rubric::before { display: none; }
+#library details.rubric summary { padding-left: 16px; }
+.lib-cat { border-left: none; padding-left: 0; }
+.lib-cat::before { content:""; display:inline-block; width:11px; height:11px; border-radius:2px; border:1.5px solid rgba(25,24,23,.5); background: var(--spine); margin-right:10px; }
+.lib-chips { margin-top: 22px; padding-top: 4px; }
+.lib-chip { transition: transform .15s ease, box-shadow .15s ease; }
+.lib-chip[aria-pressed="true"] { color: var(--ink); }
+/* ===== the library as one taped sheet, flags on it (specimen) ===== */
+.lib-sheet { position:relative; border:1.5px solid rgba(25,24,23,.6); border-radius:3px; box-shadow: 7px 7px 0 #f3edda, 13px 13px 0 #faf5e4; }
+.lib-sheet .lib-tape { position:absolute; top:-12px; right:-24px; width:92px; height:25px; background: rgba(233,180,76,.55); border-left:2px dashed rgba(25,24,23,.12); border-right:2px dashed rgba(25,24,23,.12); transform: rotate(42deg); }
+.lib-sheet .lib-group:first-of-type { margin-top: 22px; }
+/* ===== the library as color-tab folders (specimen) ===== */
+.lib-sheet { margin-top: 44px; transition: background .3s ease; }
+.lib-chips { flex-wrap: wrap; gap: 6px; margin: -42px 0 16px; padding: 0 12px; position: relative; z-index: 2; }
+.lib-chip { --flag:#e7dcc0; --flagtint:#fff; border:1.5px solid rgba(25,24,23,.55); border-radius:10px 10px 0 0; background: var(--flag); padding:9px 17px 11px; box-shadow: inset 0 1px 0 rgba(255,255,255,.35); filter: saturate(.72) brightness(.985); }
+.lib-chip[data-f="product-design"] { --flag:#e9b44c; --flagtint:#fbf3da; }
+.lib-chip[data-f="ux-research"] { --flag:#8faec4; --flagtint:#eef3f7; }
+.lib-chip[data-f="product-management"] { --flag:#eda26b; --flagtint:#fdf1e3; }
+.lib-chip[data-f="marketing"] { --flag:#e59aab; --flagtint:#fbeef1; }
+.lib-chip[data-f="all"] { --flag:#ece0c2; --flagtint:#ffffff; }
+.lib-chip:hover { filter: saturate(.9); border-color: rgba(25,24,23,.75); }
+.lib-sheet .lib-tape { display: none; }
+/* ===== folders: constant sheet, colored forward tab (specimen) ===== */
+.lib-sheet[data-active] { background: #fff; }
+.lib-chip[aria-pressed="true"] { border-color: var(--ink); transform: translateY(0); filter: none; padding-top: 13px; }
+.lib-chip[aria-pressed="true"] .n { color: rgba(25,24,23,.62); }
+/* ===== folder frame in color, white paper inside (specimen) ===== */
+.lib-sheet { padding: 16px; }
+.lib-sheet .lib-chips { margin-top: -38px; }
+.lib-paper { background:#fff; border:1px solid rgba(25,24,23,.28); border-radius:2px; box-shadow: 0 1px 4px rgba(25,24,23,.10); padding: 20px 22px 22px; }
+.lib-paper .lib-group:first-of-type { margin-top: 20px; }
+/* ===== folder depth: tabs behind peek over the front folder (specimen) ===== */
+.lib-sheet { --frame:#ece0c2; background: var(--frame); }
+.lib-sheet[data-active="product-design"] { --frame:#f2cd7e; background: var(--frame); }
+.lib-sheet[data-active="ux-research"] { --frame:#b3c9d9; background: var(--frame); }
+.lib-sheet[data-active="product-management"] { --frame:#f4bc8f; background: var(--frame); }
+.lib-sheet[data-active="marketing"] { --frame:#edaebd; background: var(--frame); }
+.lib-sheet[data-active="all"] { --frame:#ece0c2; background: var(--frame); }
+.lib-sheet::after { content:""; position:absolute; top:-1.5px; left:0; right:0; height:17px; background: var(--frame); border-top:1.5px solid rgba(25,24,23,.6); border-radius:3px 3px 0 0; z-index:2; }
+.lib-chip { position:relative; z-index:1; }
+.lib-chip:hover { transform: translateY(-5px); }
+.lib-chip[aria-pressed="true"] { z-index:3; }
+/* ===== folder tabs, attached (strip removed) ===== */
+.lib-sheet::after { display: none; }
+.lib-chip { transform: translateY(-3px); border-bottom: 1.5px solid rgba(25,24,23,.55); }
+.lib-chip[aria-pressed="true"] { background: var(--frame); border-bottom: 1.5px solid var(--frame); box-shadow: inset 0 4px 0 var(--flag); }
+/* ===== project post-it (specimen) ===== */
+.proj-grid { display:grid; grid-template-columns: minmax(0,1fr) 296px; gap:52px; align-items:start; }
+@media (max-width: 900px) {
+  .proj-grid { grid-template-columns: 1fr; }
+  .postit { max-width: 340px; }
+}
+.postit { position:relative; color:#3a352a; transform: rotate(2deg); font-family: var(--serif); font-style: italic; font-size:16.5px; line-height:1.5; margin-top: 14px; }
+.postit .pin { position:absolute; top:-17px; left:50%; transform: translateX(-50%) rotate(-4deg); width:37px; height:auto; }
+.postit p { margin: 0 0 10px; }
+/* ===== post-it: stacked sheets, not a drop shadow (specimen) ===== */
+/* ===== post-it: tilted stack treatment, readable type (specimen) ===== */
+.postit { background: none; box-shadow: none; padding: 0; }
+.postit::before, .postit::after { content:""; position:absolute; inset:0; border-radius:2px; z-index:0; }
+.postit::before { background:#f7dc7d; transform: rotate(1.5deg) translate(5px, 4px); box-shadow: 0 3px 9px rgba(25,24,23,.13); }
+.postit::after { background:#faf5e4; transform: rotate(-1.1deg) translate(-4px, 2px); }
+.postit-sheet { position:relative; z-index:1; background: linear-gradient(180deg, #fff6c2, #fdf0a6); color:#33302a; padding: 36px 25px 23px; font-family: var(--sans); font-style: normal; font-size:16px; line-height:1.55; border-radius:2px; }
+.postit-sheet p { margin: 0 0 10px; }
+.postit .sign { font-family: var(--serif); font-style: italic; font-size:19px; margin: 2px 0 0; }
+.postit .pin { z-index: 2; }
+.postit .sign .li-link { display:inline-block; margin-right:7px; vertical-align:-3px; line-height:0; }
+.postit .sign .li-link:hover rect { fill:#0a66c2; }
+/* ===== post-it hover: it lifts (specimen) ===== */
+.postit, .postit::before, .postit::after, .postit .pin { transition: transform .35s ease; }
+.postit:hover { transform: rotate(.6deg) translateY(-5px); }
+.postit:hover::before { transform: rotate(2.3deg) translate(7px, 6px); }
+.postit:hover::after { transform: rotate(-1.9deg) translate(-6px, 3px); }
+.postit:hover .pin { transform: translateX(-50%) rotate(-10deg); }
+@media (prefers-reduced-motion: reduce) {
+  .postit, .postit::before, .postit::after, .postit .pin { transition: none; }
+  .postit:hover { transform: rotate(2deg); }
+}
+/* ===== the whole note is the link (specimen) ===== */
+.postit-link { display:block; text-decoration:none; color: inherit; }
+.postit { cursor: pointer; }
+.postit-link:hover .li-link rect { fill:#0a66c2; }
+.postit-link:focus-visible .postit-sheet { outline: 2px solid var(--accent); outline-offset: 3px; }
+/* ===== three ways become sheets (specimen) ===== */
+.ways { gap: 30px; border-top: none; }
+.way { background:#fff; border:1.5px solid var(--ink); box-shadow: 7px 7px 0 #f3edda, 13px 13px 0 #faf5e4; padding: 22px 22px 20px; border-left: 1.5px solid var(--ink); }
+@media (max-width: 760px) {
+  .ways { gap: 24px; }
+}
+/* ===== ways sheets: exact hero-card treatment, tape included; stray line gone (specimen) ===== */
+.ways { border-bottom: none; padding-bottom: 16px; margin-top: 32px; }
+.way { position: relative; }
+.way::before { content:""; position:absolute; top:-14px; left:50%; transform: translateX(-50%); width:118px; height:27px; background: rgba(233,180,76,.55); border-left:2px dashed rgba(25,24,23,.12); border-right:2px dashed rgba(25,24,23,.12); }
+/* ===== ways sheets: kill the old sibling hairline for good (specimen) ===== */
+.ways .way + .way { border-left: 1.5px solid var(--ink); border-top: 1.5px solid var(--ink); padding-left: 22px; }
+/* ===== footer brand + logo easter egg (specimen) ===== */
+.foot-brand { display:flex; align-items:center; gap:11px; margin-bottom:18px; }
+.foot-name { font-family: var(--serif); font-weight:600; font-size:20px; }
+.foot-logo .egg-zone { cursor: pointer; transition: opacity .15s ease; }
+.foot-logo .egg-zone:hover { opacity: .78; }
+.egg { border:1.5px solid var(--ink); background:#fff; box-shadow: 7px 7px 0 #f3edda, 13px 13px 0 #faf5e4; padding: 10px 12px 8px; margin: 4px 0 26px; }
+.egg canvas { display:block; width:100%; height:auto; }
+.egg-cap { display:flex; justify-content:space-between; gap:12px; border-top:1px solid var(--line); padding-top:7px; margin-top:4px; font-family: var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform: uppercase; color: var(--muted); }
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -388,8 +583,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
     <div class="hero-visual">
       <div class="cap">Highlights from the library</div>
       <div class="rstack" id="rstack">
-        <a class="rcard on" href="#rubric-usability-heuristics-review">
-          <div class="rtop"><span class="rcat">Design</span><span class="rcount">1 / 5</span></div>
+        <a class="rcard on" href="#rubric-usability-heuristics-review"><span class="rtape" aria-hidden="true"></span>
+          <div class="rtop"><span class="rcat">Product design</span><span class="rcount">1 / 5</span></div>
           <h3>Usability Heuristics Review</h3>
           <p class="rsum">Evaluates a screen or flow against the ten usability heuristics published by Jakob Nielsen, reporting problems with severity ratings.</p>
           <ul>
@@ -403,7 +598,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
             <div class="rgo">See it in the library ↓</div>
           </div>
         </a>
-        <a class="rcard" href="#rubric-positioning-review">
+        <a class="rcard" href="#rubric-positioning-review"><span class="rtape" aria-hidden="true"></span>
           <div class="rtop"><span class="rcat">Marketing</span><span class="rcount">2 / 5</span></div>
           <h3>Positioning Review</h3>
           <p class="rsum">Reviews a positioning document against the five components of effective positioning.</p>
@@ -418,8 +613,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
             <div class="rgo">See it in the library ↓</div>
           </div>
         </a>
-        <a class="rcard" href="#rubric-user-story-review">
-          <div class="rtop"><span class="rcat">Management</span><span class="rcount">3 / 5</span></div>
+        <a class="rcard" href="#rubric-user-story-review"><span class="rtape" aria-hidden="true"></span>
+          <div class="rtop"><span class="rcat">Product management</span><span class="rcount">3 / 5</span></div>
           <h3>User Story Review</h3>
           <p class="rsum">Reviews a user story and its acceptance criteria, judging whether the story is valuable to a named user, small and independent enough to build, and estimable from what is written.</p>
           <ul>
@@ -433,8 +628,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
             <div class="rgo">See it in the library ↓</div>
           </div>
         </a>
-        <a class="rcard" href="#rubric-inclusive-design-audit">
-          <div class="rtop"><span class="rcat">Design</span><span class="rcount">4 / 5</span></div>
+        <a class="rcard" href="#rubric-inclusive-design-audit"><span class="rtape" aria-hidden="true"></span>
+          <div class="rtop"><span class="rcat">Product design</span><span class="rcount">4 / 5</span></div>
           <h3>Inclusive Design Audit</h3>
           <p class="rsum">Audits a screen or flow against five inclusive design principles for cultural fit, checking who the design includes and who it unintentionally leaves out.</p>
           <ul>
@@ -448,8 +643,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
             <div class="rgo">See it in the library ↓</div>
           </div>
         </a>
-        <a class="rcard" href="#rubric-accessibility-review">
-          <div class="rtop"><span class="rcat">Design</span><span class="rcount">5 / 5</span></div>
+        <a class="rcard" href="#rubric-accessibility-review"><span class="rtape" aria-hidden="true"></span>
+          <div class="rtop"><span class="rcat">Product design</span><span class="rcount">5 / 5</span></div>
           <h3>Accessibility Review</h3>
           <p class="rsum">Reviews a screen's design for accessibility problems that are visible in a screenshot or description, judged against criteria derived from WCAG 2.2.</p>
           <ul>
@@ -468,7 +663,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
     </div>
   </div>
 
-  <div class="connect" id="connect" role="region" aria-labelledby="connect-h">
+  <div class="connect" id="connect" role="region" aria-labelledby="connect-h"><span class="ctape tl" aria-hidden="true"></span><span class="ctape br" aria-hidden="true"></span>
     <h2 id="connect-h">Connect the MCP server</h2>
     <p>The whole library is served over MCP. Add this address to your AI tool and it can list the rubrics, fetch the one you ask for, and apply it in your chat. No account and no key.</p>
     <div class="row">
@@ -528,7 +723,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p class="rec-cap" id="rec-cap">One message with the address, and the assistant sets the connection up itself. No account, no key, and nothing to install. This was recorded in Muse; in Claude, ChatGPT, Cursor, or Grok, the same address goes into the connector settings listed above.</p>
         <p class="rec-value"><strong>Every review comes back as analysis you or your AI can act on.</strong> The findings name what needs work, where it sits, and what to fix first. You can make the fixes yourself, or the same conversation can draft the fix brief, rework the design, and score the revision against the same rubric.</p>
       </div>
-      <div class="rec-stage">
+      <div class="rec-stage"><svg class="vidrings" viewBox="0 0 470 28" aria-hidden="true"><rect x="28" y="2" width="8" height="24" rx="4" fill="none" stroke="#9a9a9a" stroke-width="2.5"/><circle cx="32" cy="23" r="2.2" fill="rgba(25,24,23,.28)"/><rect x="86" y="2" width="8" height="24" rx="4" fill="none" stroke="#9a9a9a" stroke-width="2.5"/><circle cx="90" cy="23" r="2.2" fill="rgba(25,24,23,.28)"/><rect x="144" y="2" width="8" height="24" rx="4" fill="none" stroke="#9a9a9a" stroke-width="2.5"/><circle cx="148" cy="23" r="2.2" fill="rgba(25,24,23,.28)"/><rect x="202" y="2" width="8" height="24" rx="4" fill="none" stroke="#9a9a9a" stroke-width="2.5"/><circle cx="206" cy="23" r="2.2" fill="rgba(25,24,23,.28)"/><rect x="260" y="2" width="8" height="24" rx="4" fill="none" stroke="#9a9a9a" stroke-width="2.5"/><circle cx="264" cy="23" r="2.2" fill="rgba(25,24,23,.28)"/><rect x="318" y="2" width="8" height="24" rx="4" fill="none" stroke="#9a9a9a" stroke-width="2.5"/><circle cx="322" cy="23" r="2.2" fill="rgba(25,24,23,.28)"/><rect x="376" y="2" width="8" height="24" rx="4" fill="none" stroke="#9a9a9a" stroke-width="2.5"/><circle cx="380" cy="23" r="2.2" fill="rgba(25,24,23,.28)"/><rect x="434" y="2" width="8" height="24" rx="4" fill="none" stroke="#9a9a9a" stroke-width="2.5"/><circle cx="438" cy="23" r="2.2" fill="rgba(25,24,23,.28)"/></svg>
         <figure class="vid rec-slide is-active">
           <div class="bar"><span class="who">Recording 1 · Adding the MCP · 0:43</span></div>
           <video controls preload="none" playsinline width="1184" height="1556" poster="demo-add-mcp.jpg" src="demo-add-mcp.mp4"></video>
@@ -543,7 +738,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         </figure>
         <div class="rec-nav">
           <button type="button" class="rec-btn" id="rec-prev" aria-label="Previous recording">&#8592;</button>
-          <span class="rec-count" id="rec-count">Scene 1 of 3</span>
+          <span class="rec-count" id="rec-count">Page 1 of 3</span>
           <button type="button" class="rec-btn" id="rec-next" aria-label="Next recording">&#8594;</button>
         </div>
       </div>
@@ -568,16 +763,17 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
     <div class="who-row"><div class="who">Small teams and solo builders</div><p>The criteria a staff designer or a research lead would apply, available in the room even when there is no staff designer or research lead in it. If you are also the one building, that covers the Accessibility Review on the interface you shipped and the Copy Review on the error messages and empty states nobody was assigned, because on a small team that person is you.</p></div>
   </section>
 
-<section>
-    <div class="kicker">The library, product design</div>
-    <h2>Product design</h2>
-    <p class="sub">Run one before a design ships, before a crit, or at handoff. Select a rubric for its full description.</p>
-    <dl class="levels" aria-label="Rubric levels">
+<section id="library" aria-labelledby="library-h">
+<div class="kicker">The library</div>
+<h2 id="library-h">The library</h2>
+<p class="sub">Each rubric is one Markdown file: a set of criteria, a scoring scale, an output format, and honesty rules, written down before the work arrives. Select a rubric for its full description, what you provide, and how it reports.</p>
+<div class="lib-sheet"><div class="lib-chips" role="group" aria-label="Filter the library"><button type="button" class="lib-chip" data-f="all" aria-pressed="true">All rubrics <span class="n">21</span></button><button type="button" class="lib-chip" data-f="product-design" aria-pressed="false">Product design <span class="n">8</span></button><button type="button" class="lib-chip" data-f="ux-research" aria-pressed="false">UX research <span class="n">4</span></button><button type="button" class="lib-chip" data-f="product-management" aria-pressed="false">Product management <span class="n">5</span></button><button type="button" class="lib-chip" data-f="marketing" aria-pressed="false">Marketing <span class="n">4</span></button></div>
+<div class="lib-paper"><p class="lib-count" id="lib-count" aria-live="polite">Showing all 21 rubrics.</p>
+<dl class="levels" aria-label="Rubric levels">
       <dt><span class="lvl lvl-simple">Simple</span></dt><dd>One screen and one narrow question. Quick to run, on any current model.</dd>
       <dt><span class="lvl lvl-standard">Standard</span></dt><dd>One screen or flow, judged against structured criteria, with a fuller report.</dd>
       <dt><span class="lvl lvl-deep">Deep</span></dt><dd>Needs more than the artifact itself, such as a full board with its rationale, or context the rubric asks you for before it judges.</dd>
-    </dl>
-    <details class="rubric" id="rubric-usability-heuristics-review">
+    </dl><div class="lib-group" data-cat="product-design" style="--spine:#e9b44c"><h3 class="lib-cat">Product design</h3><p class="sub">Run one before a design ships, before a crit, or at handoff. Select a rubric for its full description.</p><details class="rubric" data-cat="product-design" id="rubric-usability-heuristics-review">
       <summary>
         <span class="title">Usability Heuristics Review</span>
         <span class="level" data-tip="Standard: one screen or flow, judged against structured criteria, with a fuller report.">Standard</span>
@@ -590,8 +786,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>What you provide:</strong> Screenshots of the screen or the flow's screens in order, or a description detailed enough to name the states, messages, and actions. State the product's context (what it is, who uses it) when the screens do not make it obvious.</p>
         <p><strong>How it reports:</strong> No overall score; every problem rated 0-4 on the severity scale defined in the Scoring section</p>
       </div>
-    </details>
-    <details class="rubric">
+    </details><details class="rubric" data-cat="product-design">
       <summary>
         <span class="title">Design Principles Score</span>
         <span class="level" data-tip="Standard: one screen or flow, judged against structured criteria, with a fuller report.">Standard</span>
@@ -604,8 +799,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>What you provide:</strong> A screenshot of the screen or flow, or a description that names the visible elements and their text.</p>
         <p><strong>How it reports:</strong> 1-5 per principle; overall 0-100</p>
       </div>
-    </details>
-    <details class="rubric" id="rubric-inclusive-design-audit">
+    </details><details class="rubric" data-cat="product-design" id="rubric-inclusive-design-audit">
       <summary>
         <span class="title">Inclusive Design Audit</span>
         <span class="level" data-tip="Standard: one screen or flow, judged against structured criteria, with a fuller report.">Standard</span>
@@ -618,8 +812,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>What you provide:</strong> A screenshot of the screen or flow, or a description that names the visible elements, imagery, and text.</p>
         <p><strong>How it reports:</strong> 0-2 per principle; overall 0-10</p>
       </div>
-    </details>
-    <details class="rubric" id="rubric-accessibility-review">
+    </details><details class="rubric" data-cat="product-design" id="rubric-accessibility-review">
       <summary>
         <span class="title">Accessibility Review</span>
         <span class="level" data-tip="Standard: one screen or flow, judged against structured criteria, with a fuller report.">Standard</span>
@@ -632,8 +825,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>What you provide:</strong> A screenshot of the screen at a realistic size, or a description that names the text, its colors, and the controls. State the platform (web, iOS, Android, desktop) when it is known, because target and text expectations differ by platform.</p>
         <p><strong>How it reports:</strong> No overall score; each finding rated Blocker, Serious, Moderate, or Minor; criteria that cannot be judged from the input are reported as Cannot judge</p>
       </div>
-    </details>
-    <details class="rubric">
+    </details><details class="rubric" data-cat="product-design">
       <summary>
         <span class="title">Copy Review</span>
         <span class="level" data-tip="Standard: one screen or flow, judged against structured criteria, with a fuller report.">Standard</span>
@@ -646,8 +838,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>What you provide:</strong> A screenshot of the screen, or the screen’s text supplied directly (a copy list, a transcript of the design, or the strings from the product). If text is supplied directly, say so in the result.</p>
         <p><strong>How it reports:</strong> None</p>
       </div>
-    </details>
-    <details class="rubric">
+    </details><details class="rubric" data-cat="product-design">
       <summary>
         <span class="title">Five Second Test</span>
         <span class="level" data-tip="Simple: one screen and one narrow question. Quick to run, on any current model.">Simple</span>
@@ -660,8 +851,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>What you provide:</strong> A screenshot of one screen at its full bounds, or a description that names the visible elements and their text. One screen per run.</p>
         <p><strong>How it reports:</strong> Memorability 0-10; simulated panel of 5; 3-of-5 rule</p>
       </div>
-    </details>
-    <details class="rubric">
+    </details><details class="rubric" data-cat="product-design">
       <summary>
         <span class="title">Attention Prediction</span>
         <span class="level" data-tip="Simple: one screen and one narrow question. Quick to run, on any current model.">Simple</span>
@@ -674,8 +864,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>What you provide:</strong> A screenshot of the screen (required for coordinates). Optionally, the intended attention path: the elements the design wants seen first, second, and third. A text description alone can support the ranked prediction but not the coordinates; say so and omit them.</p>
         <p><strong>How it reports:</strong> Exactly 3 hotspots; intensity High 70-100, Medium 40-69, Low 20-39</p>
       </div>
-    </details>
-    <details class="rubric" id="rubric-design-quality">
+    </details><details class="rubric" data-cat="product-design" id="rubric-design-quality">
       <summary>
         <span class="title">Design Quality</span>
         <span class="level" data-tip="Deep: needs more than the artifact itself, such as a full board with its rationale, or context the rubric asks you for before it judges.">Deep</span>
@@ -688,14 +877,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>What you provide:</strong> The design as a multi-frame board (a board overview plus the frames in reading order), with whatever rationale the designer has written on the board or alongside it. A single screen can be submitted, but the dimensions that judge intent and evidence will usually be unjudgeable from a screen alone.</p>
         <p><strong>How it reports:</strong> 1-5 per dimension; overall 0-100 across the dimensions that could be judged</p>
       </div>
-    </details>
-  </section>
-
-  <section>
-    <div class="kicker">The library, UX research</div>
-    <h2>UX research</h2>
-    <p class="sub">Run one before a study is fielded, or before findings are presented to stakeholders. Select a rubric for its full description.</p>
-    <details class="rubric">
+    </details></div><div class="lib-group" data-cat="ux-research" style="--spine:#8faec4"><h3 class="lib-cat">UX research</h3><p class="sub">Run one before a study is fielded, or before findings are presented to stakeholders. Select a rubric for its full description.</p><details class="rubric" data-cat="ux-research">
       <summary>
         <span class="title">Study Plan Review</span>
         <span class="level" data-tip="Deep: needs more than the artifact itself, such as a full board with its rationale, or context the rubric asks you for before it judges.">Deep</span>
@@ -708,8 +890,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>What you provide:</strong> The study plan as written: its goals or research questions, the method, the participant definition and screening approach, and whatever session structure, tasks, or materials the plan specifies. A short informal plan is a valid input; the review judges what is there against what the study needs.</p>
         <p><strong>How it reports:</strong> No numeric score; each criterion judged Ready, Needs work, or Missing, with an overall readiness verdict</p>
       </div>
-    </details>
-    <details class="rubric">
+    </details><details class="rubric" data-cat="ux-research">
       <summary>
         <span class="title">Survey Review</span>
         <span class="level" data-tip="Standard: one screen or flow, judged against structured criteria, with a fuller report.">Standard</span>
@@ -722,8 +903,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>What you provide:</strong> The full questionnaire text: the introduction shown to respondents, every question with its answer options and scales in order, and any skip logic described. The survey’s purpose and audience, when known, sharpen the review; without them the review judges craft alone and says so.</p>
         <p><strong>How it reports:</strong> No overall score; every flaw rated Invalidating, Biasing, or Burden, with a suggested revision for each flawed question</p>
       </div>
-    </details>
-    <details class="rubric">
+    </details><details class="rubric" data-cat="ux-research">
       <summary>
         <span class="title">Findings Review</span>
         <span class="level" data-tip="Standard: one screen or flow, judged against structured criteria, with a fuller report.">Standard</span>
@@ -736,8 +916,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>What you provide:</strong> The readout itself, in full: claims, quotes, numbers, and recommendations as the audience will see them. Access to the underlying evidence (session notes, recordings, response data) strengthens the review when available; without it, the review judges the readout’s internal support and labels every claim check accordingly.</p>
         <p><strong>How it reports:</strong> No numeric score; each criterion judged Holds, Needs work, or Missing, plus a claim-by-claim audit and a reliance verdict</p>
       </div>
-    </details>
-    <details class="rubric">
+    </details><details class="rubric" data-cat="ux-research">
       <summary>
         <span class="title">Competitive Analysis Review</span>
         <span class="level" data-tip="Standard: one screen or flow, judged against structured criteria, with a fuller report.">Standard</span>
@@ -750,14 +929,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>What you provide:</strong> The competitive analysis as written: the competitor set, the comparison, and the conclusions drawn from them. Source material behind the analysis (product trials, pricing pages, customer reviews, win and loss interviews) strengthens the review when supplied; without it, the review judges the evidence the document presents and says so.</p>
         <p><strong>How it reports:</strong> No numeric score; each criterion judged Holds, Needs work, or Missing, with an overall reliance verdict</p>
       </div>
-    </details>
-  </section>
-
-  <section>
-    <div class="kicker">The library, product management</div>
-    <h2>Product management</h2>
-    <p class="sub">Run one before a team commits: to building, to a roadmap, or to a date. Select a rubric for its full description.</p>
-    <details class="rubric">
+    </details></div><div class="lib-group" data-cat="product-management" style="--spine:#eda26b"><h3 class="lib-cat">Product management</h3><p class="sub">Run one before a team commits: to building, to a roadmap, or to a date. Select a rubric for its full description.</p><details class="rubric" data-cat="product-management">
       <summary>
         <span class="title">PRD Review</span>
         <span class="level" data-tip="Deep: needs more than the artifact itself, such as a full board with its rationale, or context the rubric asks you for before it judges.">Deep</span>
@@ -770,8 +942,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>What you provide:</strong> The PRD as written, including its goals, scope, and success measures sections in whatever form the team keeps them.</p>
         <p><strong>How it reports:</strong> No numeric score; each criterion judged Ready, Needs work, or Missing, with an overall readiness verdict</p>
       </div>
-    </details>
-    <details class="rubric">
+    </details><details class="rubric" data-cat="product-management">
       <summary>
         <span class="title">Roadmap Review</span>
         <span class="level" data-tip="Standard: one screen or flow, judged against structured criteria, with a fuller report.">Standard</span>
@@ -784,8 +955,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>What you provide:</strong> The roadmap as presented: its items, groupings, and dates or horizons in whatever form the team keeps them, board, document, or slides.</p>
         <p><strong>How it reports:</strong> No numeric score; each criterion judged Holds, Needs work, or Missing, with an overall reliance verdict</p>
       </div>
-    </details>
-    <details class="rubric">
+    </details><details class="rubric" data-cat="product-management">
       <summary>
         <span class="title">Problem Statement Review</span>
         <span class="level" data-tip="Simple: one screen and one narrow question. Quick to run, on any current model.">Simple</span>
@@ -798,8 +968,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>What you provide:</strong> The problem statement as written, a sentence, a paragraph, or a one-page brief.</p>
         <p><strong>How it reports:</strong> No numeric score; each criterion judged Holds, Needs work, or Missing, with an overall verdict on whether the statement is ready to work from</p>
       </div>
-    </details>
-    <details class="rubric" id="rubric-user-story-review">
+    </details><details class="rubric" data-cat="product-management" id="rubric-user-story-review">
       <summary>
         <span class="title">User Story Review</span>
         <span class="level" data-tip="Simple: one screen and one narrow question. Quick to run, on any current model.">Simple</span>
@@ -812,8 +981,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>What you provide:</strong> One user story with its acceptance criteria, or a small set of stories from the same feature.</p>
         <p><strong>How it reports:</strong> No numeric score; each story judged against each criterion, with an overall readiness verdict per story</p>
       </div>
-    </details>
-    <details class="rubric">
+    </details><details class="rubric" data-cat="product-management">
       <summary>
         <span class="title">Project Plan Review</span>
         <span class="level" data-tip="Deep: needs more than the artifact itself, such as a full board with its rationale, or context the rubric asks you for before it judges.">Deep</span>
@@ -826,14 +994,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>What you provide:</strong> The project plan as written: goal, scope, milestones, timeline, owners, and risk material.</p>
         <p><strong>How it reports:</strong> No numeric score; each criterion judged Ready, Needs work, or Missing, with an overall commitment verdict</p>
       </div>
-    </details>
-  </section>
-
-  <section>
-    <div class="kicker">The library, marketing</div>
-    <h2>Marketing</h2>
-    <p class="sub">Run one before positioning, messaging, a launch, or a battlecard reaches the people who will repeat it. Select a rubric for its full description.</p>
-    <details class="rubric" id="rubric-positioning-review">
+    </details></div><div class="lib-group" data-cat="marketing" style="--spine:#e59aab"><h3 class="lib-cat">Marketing</h3><p class="sub">Run one before positioning, messaging, a launch, or a battlecard reaches the people who will repeat it. Select a rubric for its full description.</p><details class="rubric" data-cat="marketing" id="rubric-positioning-review">
       <summary>
         <span class="title">Positioning Review</span>
         <span class="level" data-tip="Standard: one screen or flow, judged against structured criteria, with a fuller report.">Standard</span>
@@ -846,8 +1007,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>What you provide:</strong> The positioning document as written: the components in whatever form the team keeps them, canvas, doc, or deck section.</p>
         <p><strong>How it reports:</strong> No numeric score; each criterion judged Holds, Needs work, or Missing, with an overall verdict</p>
       </div>
-    </details>
-    <details class="rubric">
+    </details><details class="rubric" data-cat="marketing">
       <summary>
         <span class="title">Messaging Review</span>
         <span class="level" data-tip="Standard: one screen or flow, judged against structured criteria, with a fuller report.">Standard</span>
@@ -860,8 +1020,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>What you provide:</strong> The messaging document as written: core message, pillars or value propositions, and proof points, in whatever form the team keeps them.</p>
         <p><strong>How it reports:</strong> No numeric score; each criterion judged Holds, Needs work, or Missing, with an overall verdict</p>
       </div>
-    </details>
-    <details class="rubric">
+    </details><details class="rubric" data-cat="marketing">
       <summary>
         <span class="title">Launch Plan Review</span>
         <span class="level" data-tip="Deep: needs more than the artifact itself, such as a full board with its rationale, or context the rubric asks you for before it judges.">Deep</span>
@@ -874,8 +1033,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>What you provide:</strong> The launch plan as written: goals, tier, timeline, assets, owners, and channel activities.</p>
         <p><strong>How it reports:</strong> No numeric score; each criterion judged Ready, Needs work, or Missing, with a launch readiness verdict</p>
       </div>
-    </details>
-    <details class="rubric">
+    </details><details class="rubric" data-cat="marketing">
       <summary>
         <span class="title">Battlecard Review</span>
         <span class="level" data-tip="Simple: one screen and one narrow question. Quick to run, on any current model.">Simple</span>
@@ -888,14 +1046,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
         <p><strong>What you provide:</strong> The battlecard as written: competitor overview, differentiators, talk tracks, objection handling, pricing notes, and proof points.</p>
         <p><strong>How it reports:</strong> No numeric score; each criterion judged Holds, Needs work, or Missing, with an overall verdict</p>
       </div>
-    </details>
-  </section>
-
-  <section>
-    <div class="kicker">The project</div>
-    <h2>Open, and growing</h2>
-    <p>ProductRubric is an open project. The library is created and maintained by David Nguyen, and it grows through contributions. If your team has a review it runs again and again, you can write it as a rubric in the shared format and propose it to the library. Rubrics based on a published framework stay credited to that framework’s author, and contributed rubrics carry their writer’s name. The <a href="/create">builder</a> writes the file for you from a form, if you would rather not start from the blank template.</p>
-  </section>
+    </details></div>
+</div></div>
+</section>
 
   <section>
     <div class="kicker">Getting started</div>
@@ -910,6 +1063,18 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
     </div>
     <p class="analogy"><code>DESIGN.md</code> tells an AI how to create the design. <code>PRODUCTRUBRIC.md</code> tells an AI how to judge it.</p>
     <p class="note">A rubric standardizes the questions, the criteria, and the shape of the report. It cannot standardize the judgment inside the answers, which depends on the model you run and the material you give it. Treat a result as a structured review by a capable reader, not as a measurement.</p>
+  </section>
+
+  <section>
+    <div class="kicker">The project</div>
+    <h2>Open, and growing</h2>
+    <div class="proj-grid">
+    <div>
+    <p>ProductRubric is an open project. The library is created and maintained by David Nguyen, and it grows through contributions. If your team has a review it runs again and again, you can write it as a rubric in the shared format and propose it to the library. Rubrics based on a published framework stay credited to that framework’s author, and contributed rubrics carry their writer’s name. The <a href="/create">builder</a> writes the file for you from a form, if you would rather not start from the blank template.</p>
+    </div>
+    <a class="postit-link" href="https://www.linkedin.com/mynetwork/discovery-see-all/?usecase=PEOPLE_FOLLOWS&amp;followMember=usercentric" target="_blank" rel="noopener" aria-label="Follow David Nguyen on LinkedIn"><aside class="postit"><div class="postit-sheet"><svg class="pin" viewBox="0 0 40 44" aria-hidden="true"><ellipse cx="20" cy="31" rx="9" ry="2.6" fill="rgba(25,24,23,.18)"/><path d="M20 24 L18.2 40 L21.8 40 Z" fill="#8a8a8a"/><ellipse cx="20" cy="23" rx="10" ry="4.6" fill="#7e1f20"/><circle cx="20" cy="12" r="10.5" fill="#9e2a2b"/><circle cx="16.4" cy="8.4" r="3.4" fill="rgba(255,255,255,.35)"/></svg><p>Run a rubric on whatever you are working on this week, then tell me how it went: what helped, and what got in the way. I read every note, and the best changes here have come from people using it on real work.</p>
+    <p class="sign"><span class="li-link"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="1" y="1" width="22" height="22" rx="5" fill="#55504a"/><text x="12" y="16.8" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#fdf0a6">in</text></svg></span> David Nguyen</p></div></aside></a>
+    </div>
   </section>
 
   <section>
@@ -938,6 +1103,17 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
   </main>
 
   <footer>
+    <div class="foot-brand"><svg class="foot-logo" viewBox="0 0 48 48" width="34" height="34" role="img" aria-label="ProductRubric logo">
+<rect x="0" y="0" width="22" height="22" rx="3" fill="#292622" class="egg-zone"/>
+<path d="M25.5 0h19a3 3 0 0 1 3 3v11c0 4.4-3.6 8-8 8h-14z" fill="#f3e9cf"/>
+<polyline points="31,11.5 35.3,15.8 43,7.5" fill="none" stroke="#9e2a2b" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="0" y="25.5" width="22" height="22" rx="3" fill="#292622" class="egg-zone"/>
+<path class="egg-zone" d="M25.5 33 L33 25.5h11.5a3 3 0 0 1 3 3V44.5a3 3 0 0 1-3 3H28.5a3 3 0 0 1-3-3z" fill="#292622"/>
+</svg><span class="foot-name">ProductRubric</span></div>
+    <div class="egg" id="egg" hidden>
+      <canvas id="egg-cv" width="680" height="128"></canvas>
+      <div class="egg-cap"><span>Space, click, or tap to jump the unchecked boxes</span><span class="egg-score" id="egg-score">Checked: 0</span></div>
+    </div>
     <p>ProductRubric is created and maintained by <a href="https://davidnguyen.com/">David Nguyen</a>, founder of <a href="https://usersage.com/">User Sage</a>, a user research and usability testing platform, and maker of <a href="https://designsage.app/">Design Sage</a>, an AI design review tool for Figma.</p>
     <p>New rubrics and the thinking behind them are written up in <a href="https://usercentric.beehiiv.com">Design Clarity</a>, David Nguyen's newsletter on UX design and research.</p>
     <p>The rubric files are licensed CC BY 4.0 and the server code is Apache 2.0. The library lives at <a href="https://github.com/productrubric/product-rubric">github.com/productrubric/product-rubric</a>, where you can also write a rubric of your own and propose it for inclusion.</p>
@@ -1054,7 +1230,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
       if (on) l.setAttribute("aria-current", "true"); else l.removeAttribute("aria-current");
     });
     if (cap) cap.textContent = caps[i];
-    if (count) count.textContent = "Scene " + (i + 1) + " of " + slides.length;
+    if (count) count.textContent = "Page " + (i + 1) + " of " + slides.length;
     if (prev) prev.disabled = i === 0;
     if (next) next.disabled = i === slides.length - 1;
     if (autoplay) {
@@ -1111,5 +1287,87 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
   openFromHash();
 })();
 </script>
+
+<script>
+(function () {
+  var chips = document.querySelectorAll(".lib-chip"), groups = document.querySelectorAll(".lib-group"),
+      count = document.getElementById("lib-count");
+  chips.forEach(function (c) { c.addEventListener("click", function () {
+    var f = c.getAttribute("data-f"), shown = 0;
+    var sheet = document.querySelector(".lib-sheet"); if (sheet) sheet.setAttribute("data-active", f);
+    chips.forEach(function (q) { q.setAttribute("aria-pressed", q === c ? "true" : "false"); });
+    groups.forEach(function (g) {
+      var on = f === "all" || g.getAttribute("data-cat") === f;
+      g.style.display = on ? "" : "none";
+      if (on) shown += g.querySelectorAll("details.rubric").length;
+    });
+    if (count) count.textContent = f === "all" ? "Showing all 21 rubrics." : "Showing " + shown + " rubrics.";
+  }); });
+})();
+</script>
+
+
+<script>
+(function () {
+  var panel = document.getElementById('egg'), cv = document.getElementById('egg-cv');
+  if (!panel || !cv) return;
+  var ctx = cv.getContext('2d'), scoreEl = document.getElementById('egg-score');
+  var W = cv.width, H = cv.height, GY = 104;
+  var running = false, over = false, jumpH = 0, vy = 0, speed = 4.6, frame = 0, nextIn = 60, score = 0, obs = [];
+  function reset() { obs = []; jumpH = 0; vy = 0; speed = 4.6; frame = 0; nextIn = 70; score = 0; over = false; scoreEl.textContent = 'Checked: 0'; }
+  function jump() {
+    if (over) { reset(); return; }
+    if (jumpH === 0) vy = 12.4;
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(25,24,23,.25)'; ctx.lineWidth = 1;
+    ctx.setLineDash([5, 6]); ctx.beginPath(); ctx.moveTo(0, GY + .5); ctx.lineTo(W, GY + .5); ctx.stroke(); ctx.setLineDash([]);
+    for (var i = 0; i < obs.length; i++) {
+      var o = obs[i];
+      ctx.fillStyle = '#fffdf7'; ctx.strokeStyle = '#191817'; ctx.lineWidth = 2;
+      ctx.fillRect(o.x, GY - o.h, o.w, o.h); ctx.strokeRect(o.x, GY - o.h, o.w, o.h);
+    }
+    var px = 44, py = GY - jumpH;
+    ctx.strokeStyle = '#9e2a2b'; ctx.lineWidth = 5.5; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.beginPath(); ctx.moveTo(px, py - 11); ctx.lineTo(px + 8, py - 3); ctx.lineTo(px + 22, py - 19); ctx.stroke();
+    if (over) {
+      ctx.fillStyle = 'rgba(255,253,247,.88)'; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#191817'; ctx.font = '600 21px Newsreader, Georgia, serif'; ctx.textAlign = 'center';
+      ctx.fillText('Checked out.', W / 2, 58);
+      ctx.font = '11px "Spline Sans Mono", monospace'; ctx.fillStyle = '#6b675e';
+      ctx.fillText('CLICK TO RUN IT AGAIN', W / 2, 80); ctx.textAlign = 'left';
+    }
+  }
+  function tick() {
+    if (!running) return;
+    frame++;
+    if (jumpH > 0 || vy > 0) { jumpH += vy; vy -= 0.62; if (jumpH <= 0) { jumpH = 0; vy = 0; } }
+    if (--nextIn <= 0) { var w = 15 + Math.random() * 6; obs.push({ x: W + 10, w: w, h: 17, passed: false }); nextIn = 68 + Math.random() * 62 - Math.min(22, speed * 2); }
+    for (var i = obs.length - 1; i >= 0; i--) {
+      var o = obs[i]; o.x -= speed;
+      if (!o.passed && o.x + o.w < 44) { o.passed = true; score++; scoreEl.textContent = 'Checked: ' + score; }
+      if (o.x + o.w < -12) obs.splice(i, 1);
+      if (o.x < 68 && o.x + o.w > 44 && jumpH < o.h) { over = true; running = false; draw(); return; }
+    }
+    speed = Math.min(9.2, speed + 0.0016);
+    draw();
+    requestAnimationFrame(tick);
+  }
+  function start() { if (!running && !over) { running = true; requestAnimationFrame(tick); } }
+  function toggle() {
+    if (panel.hidden) { panel.hidden = false; reset(); draw(); start(); }
+    else { panel.hidden = true; running = false; }
+  }
+  var zones = document.querySelectorAll('.foot-logo .egg-zone');
+  for (var i = 0; i < zones.length; i++) zones[i].addEventListener('click', toggle);
+  panel.addEventListener('pointerdown', function (e) { e.preventDefault(); jump(); start(); });
+  document.addEventListener('keydown', function (e) {
+    if (!panel.hidden && (e.code === 'Space' || e.code === 'ArrowUp')) { e.preventDefault(); jump(); start(); }
+  });
+  draw();
+})();
+</script>
+
 </body>
 </html>
