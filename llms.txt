@@ -12,6 +12,7 @@ The library has four categories and 21 rubrics. Many rubrics are built on publis
 - Every rubric also ships as an installable Skill: https://github.com/productrubric/product-rubric/tree/main/skill
 - The library is served over MCP at https://mcp.productrubric.com/mcp (tools: list_rubrics, get_rubric, about). Any MCP client can connect without an account or a key.
 - Build your own rubric in the shared format with the browser builder: https://productrubric.com/create
+- Browse the cards, one criterion per card, in 4 decks: https://productrubric.com/cards
 - Browse the library on the website: https://productrubric.com/
 
 ## Contributing a rubric
